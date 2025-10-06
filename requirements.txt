@@ -1,0 +1,17 @@
+numpy==1.26.4
+scipy==1.15.2
+matplotlib==3.10.1
+rasterio==1.4.3
+xarray==2025.3.1
+numba==0.61.2
+rio-cogeo==5.4.1
+cartopy==0.24.1
+dask==2025.3.0
+dask
+netCDF4==1.7.2
+pillow==11.1.0
+psutil==7.0.0
+pyproj==3.7.1
+scikit-image==0.25.2
+tk
+tqdm
