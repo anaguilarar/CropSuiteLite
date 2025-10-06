@@ -1,0 +1,35 @@
+SOLUTIONS_TYPE:
+  ST1: 'Croop Breeding'
+  ST2: 'Crop & Farm Management'
+  ST3: 'Water & Soil Engineering'
+  ST4: 'Ecosystem & Landscape'
+SOLUTIONS_CODE:
+  s1: 'Drought-tolerant varieties'
+  s2: 'Heat-tolerant varieties'
+  s3: 'Adjusted planting dates'
+  
+CROPS:
+  c1: maize
+  c2: millet
+  c3: wheat
+  c4: rice
+  c5: beans
+  c6: cassava
+  c7: coffeearabica
+  c8: tea
+  c9: cocoa
+
+ST1:
+  s1:
+    c1: [30]
+    c2: [30]
+    c3: [50]
+    c4: [24]
+    c5: [10,20,30]
+
+  s2:
+    c1: [16]
+    c2: [20]
+    c3: [28]
+    c4: [3]
+    c5: [1,3,4]

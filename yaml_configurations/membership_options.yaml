@@ -1,0 +1,12 @@
+GENERAL:
+  crops: [beans, maize] ## 'all' can be another option
+  climate_scenarios: [..\climate_data\mpi-esm1_ssp585_2021_2040, ..\climate_data\mpi-esm1_ssp585_2041_2060,
+                      ..\climate_data\mpi-esm1_ssp245_2021_2040, ..\climate_data\mpi-esm1_ssp245_2041_2060]
+  config_path: 'config_win_test.ini'
+  plant_param_dir: 'plant_params/available'
+  plant_param_output: 'plant_params'
+
+TEMPERATURE:
+  upper_added_limit: 5
+  scenarios: 2
+

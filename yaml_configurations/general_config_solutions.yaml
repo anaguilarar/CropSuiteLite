@@ -1,0 +1,21 @@
+GENERAL:
+  climate_scenarios: '..\nex-gddp-cmip6_AFRICA_cs_005\mpi-esm1-2-hr_ssp245_2021_2040'
+  soil_grids_data: '..\soilgrids_005'
+  srtm_path: 'data\srtm_005_world_recalculated.tif'
+  landsea_path: 'data\worldclim_land_sea_mask_005.tif'
+  output_path: 'results_test'
+  config_path: 'ini_configurations/config_win_test.ini'
+  plant_param_dir: 'plant_params/available'
+  plant_params_output: 'pp_solutions'
+  final_resolution: [5] # {0: 0.5, 1: 0.25, 2: 0.1, 3: 0.08333333333333, 4: 0.041666666666666, 5: 0.008333333333333, 6: 0.00208333333333333}
+  max_workers: 30
+  no_tiles: 15
+  consider_crop_rotation: n
+
+
+
+SOLUTIONS:
+  solutions_path: 'yaml_configurations/response_functions.yaml'
+  solution_codes: []
+  crop_codes: ['c1']
+
