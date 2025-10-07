@@ -7,7 +7,7 @@ This repository provides a simplified and modular version of the original CropSu
 
 > **Disclaimer:**  
 > This repository is an independent implementation based on the concepts, workflow, and structure described in *Zabel et al. (2025)*, “CropSuite: An open modular framework for site-specific crop modeling at global scale.”  
-> The official CropSuite framework is available from the [CropSuite GitHub repository](https://zenodo.org/records/16759895).
+> The official CropSuite framework is available from the [CropSuite Zenodo repository](https://zenodo.org/records/16759895).
 
 
 ## 📘 Reference
