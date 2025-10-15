@@ -229,8 +229,7 @@ class CropSensitivity():
 
             v = [round(float(i),2) for i in v]
             self.params[f'{var_name}_vals'] = v
-            if suit_vals is not None:
-                self.params[f'{var_name}_suit'] = v
+            if suit_vals is not None: self.params[f'{var_name}_suit'] = suit_vals
 
             self.params['name'] = orig_nam + '_' + k
             nametoexport = self.params['name']
