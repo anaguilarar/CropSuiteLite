@@ -1,0 +1,16 @@
+
+GENERAL_INFO:
+  output_dir: 'E:/AndresAguilar/spatial_data/raster/nex-gddp-cmip6_AFRICA/'
+  variables: ['pr','tasmin','tasmax', 'rsds']
+  years: [2021,2081]
+  #clip_extent: [-120,-58, -33, 34] # LATAM
+  clip_extent: [-26,-37, 56, 40] # AFRICA
+  nworkers: 16
+
+CLIMATE:
+  gcms: ['ACCESS-ESM1-5','MPI-ESM1-2-HR','EC-Earth3','INM-CM5-0','MRI-ESM2-0']
+  ssps: ['ssp126','ssp245','ssp370']
+  url_root: 'https://nex-gddp-cmip6.s3-us-west-2.amazonaws.com/NEX-GDDP-CMIP6'
+
+  
+

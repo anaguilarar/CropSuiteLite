@@ -1,3 +1,4 @@
+import copy
 import os
 import numpy as np
 
@@ -188,7 +189,7 @@ class CropSensitivity():
         Returns:
             np.array: The new array of values for the transformed range.
         """
-        import copy
+        
         assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {self.params}'
         parameter_values = copy.deepcopy(self.params[parameter + '_vals'])
         parameter_suit = copy.deepcopy(self.params[parameter + '_suit'])
@@ -207,6 +208,19 @@ class CropSensitivity():
         prec_vals_new.insert(np.argmax(parameter_suit)+1, parameter_values[np.argmax(parameter_suit)])
         parameter_suit.insert(np.argmax(parameter_suit)+1, parameter_suit[np.argmax(parameter_suit)])
         return parameter_suit, prec_vals_new
+    
+    def multiply_suit_vals(self, parameter: str, perc_factor = 0):
+        
+        assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {self.params}'
+        
+        parameter_suit = np.array(self.params[parameter + '_suit']).copy()
+        factor_value = (perc_factor /100) if (perc_factor /100) > 1 else 1+(perc_factor /100)
+        newvals = parameter_suit * factor_value
+        
+        newvals[newvals>1] = 1
+        
+        return newvals.tolist(), self.params[parameter + '_vals']
+        
 
     def remove_crop_lethal_conditions(self):
         keys_names = list(self.params.keys())
