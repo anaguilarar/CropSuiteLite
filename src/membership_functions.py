@@ -91,14 +91,15 @@ class CropSensitivity():
         Returns:
             np.array: The new array of values for the transformed range.
         """
-        assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {self.params}'
-        parameter_values = self.params[parameter + '_vals']
-        parameter_suit = self.params[parameter + '_suit']
+        assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {var.params}'
+        parameter_values = copy.deepcopy(self.params[parameter + '_vals'])
+        parameter_suit = copy.deepcopy(self.params[parameter + '_suit'])
         
         min_value = parameter_values[0]
         original_max_value = parameter_values[-1]
         if percentage:
             new_max = original_max_value * (1+(new_max/100))
+        
         
         optimal_value_index = np.argmax(parameter_suit)
         optimal_value = parameter_values[optimal_value_index]
@@ -109,27 +110,23 @@ class CropSensitivity():
         new_range = new_max - min_value
         new_optimal_value = min_value + (opt_ratio * new_range)
 
-        new_param_vals = np.zeros_like(parameter_values)
-        for i, val in enumerate(parameter_values):
+        new_param_vals = np.zeros(len(parameter_values)+1)
+        for i in range(new_param_vals.shape[0]):
             if i <= optimal_value_index:
-                original_uphill_range = optimal_value - min_value
-                if original_uphill_range == 0:
-                    proportion = 0
-                else:
-                    proportion = (val - min_value) / original_uphill_range
-                new_param_vals[i] = min_value + (proportion * (new_optimal_value - min_value))
+                val = parameter_values[i]
+                new_param_vals[i] = val
             else:
-                # Rescale the "downhill" side (from optimal to max)
+                val = parameter_values[i-1]
                 original_downhill_range = original_max_value - optimal_value
                 if original_downhill_range == 0:
                     proportion = 0
                 else:
                     proportion = (val - optimal_value) / original_downhill_range
-                
                 new_param_vals[i] = new_optimal_value + (proportion * (new_max - new_optimal_value))
                 
+        parameter_suit.insert(optimal_value_index, np.max(parameter_suit))
         return parameter_suit, new_param_vals
-    
+        
     
     def create_new_min_parameter_values(self, parameter: str, new_min: float) -> np.ndarray:
         """
