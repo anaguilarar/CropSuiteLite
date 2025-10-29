@@ -97,7 +97,7 @@ class BaseProcessor():
             
             if xrdata_r.sizes.get("y", 0) == 0:
                 # Handle reversed y-axis
-                soil_prop_red = xrdata.sel(x = slice(x_min,x_max), y = slice(y_max, y_min))
+                xrdata_r = xrdata.sel(x = slice(x_min,x_max), y = slice(y_max, y_min))
                 
                 
             xrdata_r = xrdata_r.rio.reproject_match(mask_layer, resampling = interp_fun)
@@ -325,149 +325,75 @@ class NexGenPreProcessing(BaseProcessor):
             
         return self._compute_mean_over_year_list(xtempavg_list, year_list)
     
+class NexGen(): 
+    """
+    Class to preprocess CMIP6 climate data organized in a directory structure:
 
-def resample_soilgrids_data(soilgrid_input_path, outputpath, masklayer_path = None):
-    #soilgrid_input_path = 'data/soilgrids'
-    if masklayer_path:
-        mask_layer = rio.open_rasterio(
-                        masklayer_path,
-                        masked=True,
-                    ).squeeze()
-    else:
-        mask_layer = None
+        variable/
+            scenario/
+                model/
 
-    soilgrids = Resample_SoilGridsData(soilgrid_input_path)
+    Example
+    -------
+    Directory structure:
 
-    soil_properties = list(soilgrids.files_path_dict.keys())
+    pr/ssp126/ACCESS-ESM1-5/
+    """
+    @staticmethod
+    def directories_list(path):
+        return [i for i in os.listdir(path) if os.path.isdir(os.path.join(path, i))]
 
-    for j in range(len(soil_properties)):
-        soil_variable = soil_properties[j]
-        var_paths = soilgrids.files_path_dict[soil_variable]
-
-        nfiles = len(var_paths)
-        output_var_dir = os.path.join(outputpath, soil_variable)
-        if not os.path.exists(output_var_dir):  os.mkdir(output_var_dir)
+    @property
+    def variable_names(self):
+        return {
+         'tmean': 'Temp_avg',
+         'prec': 'Prec_avg'}
         
-        for i in range(nfiles):
-            fn = os.path.basename(var_paths[i])
-            fn_path = os.path.join(output_var_dir, fn)
-            
-            if os.path.exists(fn_path): continue
-            soildata = soilgrids.read_soil_property(soil_variable, depth=i)
-            if mask_layer is None:
-                soildata.rio.to_raster(fn_path, compress="LZW", driver= "GTiff")
-            else:
+    ## assumning that there is the same scenarios and models across the variables
+    @property
+    def periods(self):
+        if self._periods is None:
+            dir_list = self.directories_list(self.input_path)
+            periods_list = set()
+            for i in dir_list:
+                    periods_list.add('_'.join(i.split('_')[-2:]))
+            self._periods = list(periods_list)
 
-                masked_data = soilgrids.mask_data(soildata, mask_layer == 2)
-                masked_data.rio.to_raster(fn_path, compress="LZW", driver= "GTiff")
-            print(f'data saved in {fn_path} ')
+        return self._periods
     
+    @property
+    def scenarios(self):
+        if self._scenarios is None:
+            dir_list = self.directories_list(self.input_path)
+            scen_list = set()
+            for i in dir_list:
+                    scen_list.add(i[i.index('ssp'):].split('_')[0])
+            self._scenarios = list(scen_list)
+        return self._scenarios
 
-def create_climatology_from_nexgen(climate_input_path, outputpath, masklayer_path):
-    #masklayer = 'data/africa_mask_005.tif'
-    
-    if not os.path.exists(outputpath): os.mkdir(outputpath)
+    @property
+    def models(self):
+        if self._models is None:
+            dir_list = self.directories_list(self.input_path)
+            model_list = set()
+            for i in dir_list:
+                    model_list.add(i.split('_')[0])
+            self._models = list(model_list)
 
+        return self._models
 
-    data_processor = NexGenPreProcessing(climate_input_path)
+    def __init__(self, input_pathdir):
+        """
+        Initialize the preprocessing class.
 
-    periods = [[2021,2040],
-            [2041,2060],
-            [2061,2080]]
-
-    for z in range(len(periods)):
-        for j in range(len(data_processor.scenarios)):
-            for m in range(len(data_processor.models)):
-                poi = periods[z]
-                scen = data_processor.scenarios[j]
-                mod = data_processor.models[m]
-
-                outputpath_product = '{}_{}_{}_{}'.format(mod, scen, *poi).lower()
-                outputdir = os.path.join(outputpath, outputpath_product)
-                
-                print(f'Files will be saved in {outputdir}')
-                if not os.path.exists(outputdir): os.mkdir(outputdir)
-
-                ouput_fn_temp = os.path.join(outputdir, 'Temp_avg.tif')
-                ouput_fn_prec = os.path.join(outputdir, 'Prec_avg.tif')
-
-                xds = rio.open_rasterio(
-                    masklayer_path,
-                    masked=True,
-                ).squeeze()
-
-                print('data read from {} {} {}'.format(poi, scen, mod))
-                
-                try:
-
-                    if not os.path.exists(ouput_fn_temp):
-                       
-                        tmp_avg = data_processor.calculate_climatological_temperature_daily_mean(poi[0], poi[1], scen, mod)
-                        tmp_avg = tmp_avg.rename({'lat':'y', 'lon': 'x'})
-                        tmp_avg.rio.write_crs(xds.rio.crs, inplace=True)
-                        maskedtmp_data = data_processor.mask_data(tmp_avg, xds == 2, method= 'nearest')
-                        del tmp_avg
-                        maskedtmp_data.compute().astype(np.float32).rio.to_raster(ouput_fn_temp, compress="LZW", driver= "GTiff")
-                        print(f'data saved in {ouput_fn_temp} ')
-                        del maskedtmp_data
-                        
-                    if not os.path.exists(ouput_fn_prec):
-                        prec_avg = data_processor.calculate_climatological_precipitation_daily_mean(poi[0], poi[1], scen, mod)
-                        prec_avg = prec_avg.rename({'lat':'y', 'lon': 'x'})
-                        prec_avg.rio.write_crs(xds.rio.crs, inplace=True)
-                        maskedprec_data = data_processor.mask_data(prec_avg.squeeze(), xds == 2, method= 'nearest').pr
-                        maskedprec_data.attrs = prec_avg.attrs
-                        del prec_avg
-                        maskedprec_data.compute().astype(np.float32).rio.to_raster(ouput_fn_prec, compress="LZW", driver= "GTiff")
-                        print(f'data saved in {ouput_fn_prec} ')
-                        del maskedprec_data
-                except:
-                    print('it was not possible to process {ouput_fn_temp} and {ouput_fn_prec}')
-
-
-
-def main():
-    climate_output_data = '../nex-gddp-cmip6_AFRICA_cs_005'
-    climate_input_data = 'E:/Worspace2024/aaguilar/spatial_data/raster/nex-gddp-cmip6_AFRICA'
-    mask_layer = 'data/africa_mask_005.tif'
-    create_climatology_from_nexgen(climate_input_data, climate_output_data, masklayer_path=mask_layer)
-
-    soilgrid_input_path = '../soilgrids'
-    soilgrid_outputpath = '../soilgrids_005'
-    #resample_soilgrids_data(soilgrid_input_path, soilgrid_outputpath, masklayer_path = mask_layer)
-
-    ## srtm and land sea mask
-    # 
-    processing_fuctions = BaseProcessor()    
-    
-    srtm_path = 'data/srtm_1km_world_recalculated.tif'
-    masklayer = 'data/africa_mask_005.tif'
-    output_fn = 'data/srtm_005_world_recalculated.tif'
+        Parameters
+        ----------
+        input_pathdir : str
+            Root directory containing climate model outputs.
+        """
         
-    xsrtm_re = processing_fuctions.mask_data(rio.open_rasterio(
-                                                srtm_path,
-                                                masked=True,
-                                            ).squeeze(), rio.open_rasterio(
-                                                        masklayer,
-                                                    masked=True,
-                                                ).squeeze())
+        self.input_path = input_pathdir
+        self._scenarios  = None
+        self._periods = None
 
-    xsrtm_re.where(xsrtm_re !=0, np.nan).rio.to_raster(output_fn, compress="LZW", driver= "GTiff")
-
-    landseapath = 'data/worldclim_land_sea_mask.tif'
-    output_fn = 'data/worldclim_land_sea_mask_005.tif'
-
-    xlandsea_re = processing_fuctions.mask_data(rio.open_rasterio(
-                                                    landseapath,
-                                                    masked=True,
-                                                ).squeeze(), rio.open_rasterio(
-                                                    masklayer,
-                                                    masked=True,
-                                                ).squeeze())
-    
-    xlandsea_re.rio.to_raster(output_fn, compress="LZW", driver= "GTiff")
-
-
-if __name__ == '__main__':
-    main()
-
+        self._models = None

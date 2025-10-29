@@ -1,4 +1,6 @@
 __pycache__/
 results/
+tmp_configurations/
 data/
 test.ipynb
+create_spatial_cropsuite_datasets.py
