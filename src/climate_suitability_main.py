@@ -3,6 +3,7 @@ import gc
 import math
 from multiprocessing import shared_memory
 import sys
+from typing import List
 
 import numpy as np
 from numba import jit
@@ -216,12 +217,12 @@ def calculate_average_sunshine(array_shape, lat_bounds, start_day, end_day):
     return avg_sunshine
 
 
-def read_tif_data_to_tempprecfail_arr(shape):
+def read_tif_data_to_tempprecfail_arr(ndimensions = 4) -> List:
     """
     Reads temperature, precipitation, and failure suitability arrays from GeoTIFF files.
 
     Parameters:
-    - shape (tuple): Shape of the output arrays in the format (height, width, depth).
+    
 
     Returns:
     - temp_arr (np.ndarray): Array containing temperature values for each day.
@@ -230,14 +231,22 @@ def read_tif_data_to_tempprecfail_arr(shape):
 
     Note: This function reads GeoTIFF files for each day and extracts temperature, precipitation, and failure suitability data.
     """
-    with rasterio.open(os.path.join(os.getcwd(), 'temp', '0.tif')) as src:
+    
+    computeddays  = [int(i[:-4]) for i in os.listdir(os.path.join(os.getcwd(), 'temp')) if i.endswith('.tif')]
+    computeddays.sort()
+
+    with rasterio.open(os.path.join(os.getcwd(), 'temp', f'{computeddays[0]}.tif')) as src:
         dtype = src.dtypes[0]
-    temp_arr = np.empty(shape, dtype=dtype)
-    for day in range(365):
+        dayshape = src.shape
+    
+    temp_arr = np.empty((dayshape[0],dayshape[1],len(computeddays), ndimensions), dtype=dtype)
+    
+    for i in range(len(computeddays)):
+        day = computeddays[i]
         sys.stdout.write(f'     - reading {day}.tif                      '+'\r')
         sys.stdout.flush()
         with rasterio.open(os.path.join(os.getcwd(), 'temp', f'{day}.tif')) as src:
-            temp_arr[..., day, :] = np.transpose(src.read(), (1, 2, 0))
+            temp_arr[..., i, :] = np.transpose(src.read(), (1, 2, 0))
     sys.stdout.write(f'   -> All files read in successfully                       '+'\r')
     sys.stdout.flush()
     gc.collect()
@@ -585,7 +594,7 @@ def read_tif_data_to_opt_sow_date_arr(shape):
     return temp_arr
 
 
-def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, plant, area_name) -> list:
+def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, plant, area_name, day_interval = 1) -> list:
     """
     Runs the CLIMSUIT part to assess climate suitability for crop cultivation.
 
@@ -599,6 +608,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
     - results_path (str): Path to the directory where the results will be saved.
     - plant (str): Name of the plant for which CLIMSUITE is being run.
     - winter_crops (list): List of winter crops.
+    - day_interval (int): increment of days used to calculate climate suitability conditions.
 
     Note: This function processes climate data, assesses climate suitability, and saves the results in the specified format.
     """
@@ -693,7 +703,22 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
             pass
 
     if len_growing_cycle >= 365:
-        process_day_concfut(0)
+        shm_temp = shared_memory.SharedMemory(create=True, size=temperature.nbytes)
+        shm_prec = shared_memory.SharedMemory(create=True, size=precipitation.nbytes)
+        print(shm_prec)
+        shared_temperature = np.ndarray(temperature.shape, dtype=temperature.dtype, buffer=shm_temp.buf)
+        shared_precipitation = np.ndarray(precipitation.shape, dtype=precipitation.dtype, buffer=shm_prec.buf)
+        # Copy data to shared memory
+        np.copyto(shared_temperature, temperature)
+        np.copyto(shared_precipitation, precipitation)
+        
+        process_day_concfut(0, len_growing_cycle, 
+                    temperature.shape, temperature.dtype.name, shm_temp.name,
+                    precipitation.shape, precipitation.dtype.name, shm_prec.name, 
+                    climate_config, plant, wintercrop,
+                    water_mask, crop_failures, vernalization_params, lethal, lethal_params,
+                    sowprec_params, photoperiod, photoperiod_params, max_consec_dry_days, dry_day_prec, dursowing,
+                    sowingtemp, max_prec_val, max_prec_dur, additional_conditions)
         with rasterio.open(os.path.join(tmp, '0.tif')) as src:
             data = src.read()
             temperature = data[0].astype(np.int8)
@@ -703,6 +728,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
     else:
         cpl = False
+        nfiles = int(365/day_interval)
         while not cpl:
             print(f'Limiting to {max_proc} cores')
            
@@ -717,7 +743,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
             np.copyto(shared_precipitation, precipitation)
 
             while True:
-                if len(os.listdir(tmp)) >= 365:
+                if len(os.listdir(tmp)) >= nfiles:
                     break
                 tasks = [
                 (
@@ -729,7 +755,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
                     sowprec_params, photoperiod, photoperiod_params, max_consec_dry_days, dry_day_prec, dursowing,
                     sowingtemp, max_prec_val, max_prec_dur, additional_conditions
                 )
-                for day in range(365)
+                for day in range(0, 365, day_interval)
                 ]
         
                 if max_proc == 1:
@@ -798,10 +824,11 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
             fuzzy_fail_growing_cycle_wdoy = failuresuit
             fuzzy_photop_growing_cycle_wdoy = sunshinesuit
         else:
-            fuzzy_temp_growing_cycle_wdoy = np.squeeze(np.mean(temperature[..., :364].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
-            fuzzy_precip_growing_cycle_wdoy = np.squeeze(np.mean(precipitation[..., :364].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
-            fuzzy_fail_growing_cycle_wdoy = np.squeeze(np.mean(failuresuit[..., :364].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
-            fuzzy_photop_growing_cycle_wdoy = np.squeeze(np.mean(sunshinesuit[..., :364].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
+            nfiles = len(os.listdir(tmp))
+            fuzzy_temp_growing_cycle_wdoy = np.squeeze(np.mean(temperature[..., :nfiles].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
+            fuzzy_precip_growing_cycle_wdoy = np.squeeze(np.mean(precipitation[..., :nfiles].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
+            fuzzy_fail_growing_cycle_wdoy = np.squeeze(np.mean(failuresuit[..., :nfiles].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
+            fuzzy_photop_growing_cycle_wdoy = np.squeeze(np.mean(sunshinesuit[..., :nfiles].reshape((final_shape[0], final_shape[1], 52, 7, -1)), axis=3)) # type:ignore
     del temperature, precipitation, failuresuit, sunshinesuit
     gc.collect()
     
@@ -897,7 +924,9 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
             print(' -> Calculating Limiting Factor')
             temp_suit = fuzzy_temp_growing_cycle_wdoy[np.arange(final_shape[0])[:,None], np.arange(final_shape[1])[None,:], start_growing_cycle] #type:ignore
+            temp_suit = np.clip(temp_suit, 0,100)
             prec_suit = fuzzy_precip_growing_cycle_wdoy[np.arange(final_shape[0])[:,None], np.arange(final_shape[1])[None,:], start_growing_cycle] #type:ignore
+            prec_suit = np.clip(prec_suit, 0,100)
             cffq_suit = curr_fail[np.arange(final_shape[0])[:,None], np.arange(final_shape[1])[None,:], start_growing_cycle] #type:ignore
             photoperiod_suit = fuzzy_photop_growing_cycle_wdoy[np.arange(final_shape[0])[:,None], np.arange(final_shape[1])[None,:], start_growing_cycle] #type:ignore
             limiting_factor = np.argmin([temp_suit, prec_suit, cffq_suit, photoperiod_suit], axis=0).astype(np.int8)
@@ -1055,7 +1084,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
     
 
-def climate_suitability(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, area_name) -> list:
+def climate_suitability(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, area_name, day_interval = 1) -> list:
     """
     Calculates climate suitability for multiple plants based on the CropSuite model.
 
@@ -1074,6 +1103,7 @@ def climate_suitability(climate_config, extent, temperature, precipitation, land
     - length_of_growing_period (np.ndarray): Array containing the suitable sowing days for each plant.
     - limiting_factor (np.ndarray): Array containing the limiting factors for each plant.
     - multiple_cropping (np.ndarray): Array containing information about multiple cropping for each plant.
+    - day_interval (int): increment of days used to calculate climate suitability conditions. Default 1
 
     Note: This function processes climate data for multiple plants using the CropSuite model and aggregates the results.
     """
@@ -1096,7 +1126,7 @@ def climate_suitability(climate_config, extent, temperature, precipitation, land
                 continue
 
         print(f'\nProcessing {plant} - {idx+1} out of {len(plant_list)} crops\n')
-        climsuit_new(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, plant, area_name)
+        climsuit_new(climate_config, extent, temperature, precipitation, land_sea_mask, plant_params, results_path, plant, area_name, day_interval = day_interval)
         gc.collect()
 
     print('Climate suitability calculation finished!\n\n')

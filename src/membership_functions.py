@@ -91,7 +91,7 @@ class CropSensitivity():
         Returns:
             np.array: The new array of values for the transformed range.
         """
-        assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {var.params}'
+        assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {self.params}'
         parameter_values = copy.deepcopy(self.params[parameter + '_vals'])
         parameter_suit = copy.deepcopy(self.params[parameter + '_suit'])
         
@@ -99,7 +99,6 @@ class CropSensitivity():
         original_max_value = parameter_values[-1]
         if percentage:
             new_max = original_max_value * (1+(new_max/100))
-        
         
         optimal_value_index = np.argmax(parameter_suit)
         optimal_value = parameter_values[optimal_value_index]
@@ -207,18 +206,20 @@ class CropSensitivity():
         return parameter_suit, prec_vals_new
     
     def multiply_suit_vals(self, parameter: str, perc_factor = 0):
-        
+    
         assert parameter + '_vals' in self.params, f'{parameter} is not in the parametes list {self.params}'
         
         parameter_suit = np.array(self.params[parameter + '_suit']).copy()
         factor_value = (perc_factor /100) if (perc_factor /100) > 1 else 1+(perc_factor /100)
-        newvals = parameter_suit * factor_value
+        optimal_value_index = np.argmax(parameter_suit)
+        if factor_value == 0: parameter_suit.tolist(), self.params[parameter + '_vals']
         
+        newvals = parameter_suit[:optimal_value_index] * factor_value
         newvals[newvals>1] = 1
-        
-        return newvals.tolist(), self.params[parameter + '_vals']
-        
+        newvals = newvals.tolist() + parameter_suit.tolist()[optimal_value_index:]
 
+        return newvals, self.params[parameter + '_vals']
+        
     def remove_crop_lethal_conditions(self):
         keys_names = list(self.params.keys())
         

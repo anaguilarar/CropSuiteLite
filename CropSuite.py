@@ -32,7 +32,7 @@ class CropSuiteLite():
         self.extent = check_all_inputs(self.climate_config)
         self.area_name = f'Area_{int(self.extent[0])}N{int(self.extent[1])}E-{int(self.extent[2])}N{int(self.extent[3])}E'
         self.output_path = self.climate_config['files']['output_dir']
-        
+        self.day_interval = self.climate_config['options'].get('day_interval', 1)
         self.plant_data()
         
     def resampling_env_data(self):
@@ -98,7 +98,7 @@ class CropSuiteLite():
             gc.collect()
             print(' -> Climate Data successfully loaded into memory')
         
-            climate_suitability(self.climate_config, extent, temperature, precipitation, land_sea_mask, self.plant_params,  self._temp_path, self.area_name)
+            climate_suitability(self.climate_config, extent, temperature, precipitation, land_sea_mask, self.plant_params,  self._temp_path, self.area_name, day_interval = self.day_interval)
             del temperature, precipitation
             gc.collect()
                 
