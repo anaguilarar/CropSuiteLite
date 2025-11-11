@@ -612,10 +612,15 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
     Note: This function processes climate data, assesses climate suitability, and saves the results in the specified format.
     """
-
+    day_interval = int(day_interval) if isinstance(day_interval, str) else day_interval
     irrigation = bool(int(climate_config['options']['irrigation']))
+     
+    output_dir = climate_config['files']['output_dir']
+    if os.path.basename(output_dir) == '': output_dir = output_dir[:-1]
+    #output_dir = os.path.join(output_dir+'_downscaled', area_name)
+    
     crop_failure_code = 'rrpcf'
-    rrpcf_files = [os.path.join(climate_config['files']['output_dir']+'_downscaled', area_name, f) for f in os.listdir(os.path.join(climate_config['files']['output_dir']+'_downscaled', area_name)) if f.startswith(f'ds_{crop_failure_code}_{plant.lower()}_{"ir" if irrigation else "rf"}_')]
+    rrpcf_files = [os.path.join(output_dir+'_downscaled', area_name, f) for f in os.listdir(os.path.join(output_dir+'_downscaled', area_name)) if f.startswith(f'ds_{crop_failure_code}_{plant.lower()}_{"ir" if irrigation else "rf"}_')]
 
     if len(rrpcf_files) and climate_config['climatevariability'].get('consider_variability', False):
         if os.path.exists(os.path.join(os.path.split(results_path)[0]+'_var', os.path.split(results_path)[1], plant, 'climate_suitability.tif'))\
@@ -627,6 +632,9 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
     
     final_shape = temperature.shape
+    nfiles = int(365/day_interval)
+    if day_interval != 1: final_shape = final_shape[0], final_shape[1], nfiles + 1
+    
     print('final shape', final_shape)
     # Dims: X, Y, Day, Plant
     length_of_growing_period = np.zeros((final_shape[0], final_shape[1]), dtype=np.int16)
@@ -728,7 +736,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
 
     else:
         cpl = False
-        nfiles = int(365/day_interval)
+        
         while not cpl:
             print(f'Limiting to {max_proc} cores')
            
@@ -799,7 +807,7 @@ def climsuit_new(climate_config, extent, temperature, precipitation, land_sea_ma
             shm_prec.close()
             shm_prec.unlink()
             try:
-                temperature, precipitation, failuresuit, sunshinesuit = read_tif_data_to_tempprecfail_arr((final_shape[0], final_shape[1], 365, 4))
+                temperature, precipitation, failuresuit, sunshinesuit = read_tif_data_to_tempprecfail_arr()
                 cpl = True
             except:
                 print('Error reading climate suitability data from daily geotiff files. Retrying.')

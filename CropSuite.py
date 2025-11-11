@@ -32,6 +32,8 @@ class CropSuiteLite():
         self.extent = check_all_inputs(self.climate_config)
         self.area_name = f'Area_{int(self.extent[0])}N{int(self.extent[1])}E-{int(self.extent[2])}N{int(self.extent[3])}E'
         self.output_path = self.climate_config['files']['output_dir']
+        if os.path.basename(self.output_path) == '': self.output_path = self.output_path[:-1]
+
         self.day_interval = self.climate_config['options'].get('day_interval', 1)
         self.plant_data()
         
@@ -152,8 +154,9 @@ class CropSuiteLite():
         
         ## interpolate products
         print('\nDownscaling the climate data\n')
+        print(self.output_path)
         self._output_dir = os.path.join(self.output_path+'_downscaled', self.area_name)
-        
+        print(self._output_dir)
         prec_files, temp_files, prec_dailyfiles, temp_dailyfiles = self.resampling_env_data()
         
         extents = self.split_into_tiles()

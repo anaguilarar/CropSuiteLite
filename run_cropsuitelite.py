@@ -198,6 +198,7 @@ def modify_initial_cropsuite_config(config_dict):
     no_tiles = config_dict['GENERAL'].get('no_tiles', 15)
     crop_rotation = config_dict['GENERAL'].get('consider_crop_rotation', 'n')
     spatial_resolution = config_dict['GENERAL'].get('final_resolution', 4)
+    day_interval = config_dict['GENERAL'].get('day_interval', 1)
 
     cs_name = os.path.basename(climate_scenario).replace('-','_')
     
@@ -209,6 +210,7 @@ def modify_initial_cropsuite_config(config_dict):
                             'max_workers': max_workers,
                             'no_tiles': no_tiles,
                             'consider_crop_rotation': crop_rotation,
+                            'day_interval': day_interval,
                             'resolution': spatial_resolution}
     if extent is not None:
         files_dict_to_modify.update({'extent':{'upper_left_x': extent[0],

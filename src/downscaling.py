@@ -77,7 +77,10 @@ def process_precday_interp(day, prec_data, extent, prec_thres, fine_dem_shape, l
 def _create_interpolation_folders(config_file, area_name, variable = 'precipitation'):
 
     interpolation_method = int(config_file['options'][f'{variable}_downscaling_method'])
-    output_dir = os.path.join(config_file['files']['output_dir']+'_downscaled', area_name)
+    output_dir = config_file['files']['output_dir']
+    if os.path.basename(output_dir) == '': output_dir = output_dir[:-1]
+    output_dir = os.path.join(output_dir+'_downscaled', area_name)
+    
     print('output_dir:',output_dir)
     os.makedirs(output_dir, exist_ok=True)
     return output_dir, interpolation_method
