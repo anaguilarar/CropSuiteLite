@@ -19,6 +19,7 @@ from src.check_files import check_all_inputs
 from src.crop_suitability_main import cropsuitability
 from src.crop_rotation import crop_rotation
 from src.merge_geotiff import merge_outputs_no_overlap
+from src.climate_suitability_main_xarray import climate_suitability_xarray
 
 
 class CropSuiteLite():
@@ -90,18 +91,25 @@ class CropSuiteLite():
         if all(os.path.exists(clims) for clims in climsuits):
             print('\nClimate Suitability Data is already existing.\n -> Using existing data.\n')
         else:
-            print(' -> Loading required climate data to memory...')
-            temperature = read_area_from_netcdf_list(temp_files, overlap=False, extent=extent, dayslices=temp_dailyfiles, workers=10)
-            precipitation = read_area_from_netcdf_list(prec_files, overlap=False, extent=extent, dayslices=prec_dailyfiles, workers=10)
-            fine_resolution = (temperature.shape[0], temperature.shape[1]) #type:ignore
-            land_sea_mask, _ = load_specified_lines(self.climate_config['files']['land_sea_mask'], extent, False)
-            if land_sea_mask.shape != fine_resolution:
-                land_sea_mask = interpolate_nanmask(land_sea_mask, fine_resolution)
-            gc.collect()
-            print(' -> Climate Data successfully loaded into memory')
-        
-            climate_suitability(self.climate_config, extent, temperature, precipitation, land_sea_mask, self.plant_params,  self._temp_path, self.area_name, day_interval = self.day_interval)
-            del temperature, precipitation
+            
+            # xarray test
+            doit_withxarray = True
+            if doit_withxarray:
+                climate_suitability_xarray(self.climate_config, extent, temp_files, prec_files, self.plant_params, self._temp_path, self.area_name, day_interval = self.day_interval)
+                
+            else:
+                print(' -> Loading required climate data to memory...')
+                temperature = read_area_from_netcdf_list(temp_files, overlap=False, extent=extent, dayslices=temp_dailyfiles, workers=10)
+                precipitation = read_area_from_netcdf_list(prec_files, overlap=False, extent=extent, dayslices=prec_dailyfiles, workers=10)
+                fine_resolution = (temperature.shape[0], temperature.shape[1]) #type:ignore
+                land_sea_mask, _ = load_specified_lines(self.climate_config['files']['land_sea_mask'], extent, False)
+                if land_sea_mask.shape != fine_resolution:
+                    land_sea_mask = interpolate_nanmask(land_sea_mask, fine_resolution)
+                gc.collect()
+                print(' -> Climate Data successfully loaded into memory')
+                
+                climate_suitability(self.climate_config, extent, temperature, precipitation, land_sea_mask, self.plant_params,  self._temp_path, self.area_name, day_interval = self.day_interval)
+                del temperature, precipitation
             gc.collect()
                 
     
@@ -137,7 +145,9 @@ class CropSuiteLite():
 
     def merge_geodata_outputs(self, extents):
         try:
-            for output_dir in [self.climate_config['files']['output_dir']+'_var', self.climate_config['files']['output_dir']+'_novar']:
+            out_path = self.climate_config['files']['output_dir']
+            if os.path.basename(out_path) == '': out_path = out_path[:-1]
+            for output_dir in [out_path+'_var', out_path+'_novar']:
                 if not os.path.exists(output_dir):
                     continue
                 if len(extents) > 1:
@@ -196,7 +206,7 @@ class CropSuiteLite():
         if self.climate_config['options']['remove_interim_results']:
             if len(extents) > 1:
                 for extent in extents:
-                    for output_dir in [self.climate_config['files']['output_dir']+'_var', self.climate_config['files']['output_dir']+'_novar']:
+                    for output_dir in [self.output_path+'_var', self.output_path+'_novar']:
                         if os.path.exists(output_dir):
                             shutil.rmtree(os.path.join(output_dir, f'Area_{int(extent[0])}N{int(extent[1])}E-{int(extent[2])}N{int(extent[3])}E'))
 
@@ -208,4 +218,6 @@ class CropSuiteLite():
                 os.removedirs(os.path.dirname(prec_files[0]))
             except:
                 pass
+
+        gc.collect()
 

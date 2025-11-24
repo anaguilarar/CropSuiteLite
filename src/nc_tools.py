@@ -9,7 +9,7 @@ import numpy as np
 import xarray as xr
 from tqdm import tqdm
 
-
+from pyproj import CRS
 
 def get_variable_name_from_nc(ds):
     if isinstance(ds, str):
@@ -334,11 +334,22 @@ def write_to_netcdf(data, filename, dimensions=['lat', 'lon'], extent=None, comp
         lon_var.long_name = 'longitude'
         lat_var.axis = 'Y'
         lon_var.axis = 'X'
-        
+        crs='EPSG:4326'
+        crs_obj = CRS.from_user_input(crs)
+        crs_var = ds.createVariable('crs', 'i4')
+        crs_var.long_name = 'Coordinate Reference System'
+        crs_var.grid_mapping_name = crs_obj.to_cf().get('grid_mapping_name', 'latitude_longitude')
+        crs_var.spatial_ref = crs_obj.to_wkt()
+        crs_var.EPSG_code = f"EPSG:{crs_obj.to_epsg()}" if crs_obj.to_epsg() else 'unknown'
+        # link CRS to data variable
+        grid_mapping_name = 'crs'
         # Create data variable
         var_dims = tuple(dimensions)
         var = ds.createVariable(var_name, data.dtype, var_dims, zlib=compress, complevel=complevel, fill_value=fill_value) #type:ignore
         var[:] = data
+        
+        if grid_mapping_name:
+            var.grid_mapping = grid_mapping_name
         
         # Add global attributes
         ds.setncattr('Institution', 'University of Basel, Department of Environmental Sciences')

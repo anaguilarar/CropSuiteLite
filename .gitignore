@@ -7,3 +7,4 @@ data/
 test.ipynb
 create_spatial_cropsuite_datasets.py
 run.log
+organize_results.py
