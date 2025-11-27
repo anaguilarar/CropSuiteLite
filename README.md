@@ -36,10 +36,8 @@ Key dependencies include:
 The model is executed from the command line using the `run_cropsuitelite.py` script. You must provide a path to a YAML configuration file.
 
 ```bash
-python run_cropsuitelite.py -config path/to/your/config.yaml
+python run_cropsuitelite.py -config yaml_configurations/general_config_solutions.yaml
 ```
-
-An example configuration is provided in `yaml_configurations/general_config_solutions.yaml`.
 
 ## Configuration File (`general_config_solutions.yaml`)
 
@@ -76,25 +74,6 @@ This section is designed for scenario analysis, allowing you to test how differe
 ## Data Download (CMIP6 Climate Scenarios)
 
 CropSuiteLite includes a utility to download daily climate projection data from the CMIP6 NEX-GDDP dataset, which can then be used as input for the crop suitability model. This utility leverages parallel processing for efficient data acquisition.
-
-### How it Works
-
-The `datasets/download_data.py` script, configured by `yaml_configurations/download_cmip6.yaml`, automates the following steps:
-
-1.  **Configuration:** The `download_cmip6.yaml` file specifies:
-    *   **`output_dir`**: Where to save the downloaded files.
-    *   **`variables`**: Which climate variables to download (e.g., precipitation, min/max temperature, radiation).
-    *   **`years`**: The start and end years for the data.
-    *   **`clip_extent`**: A geographic bounding box to spatially subset the data during download.
-    *   **`nworkers`**: The number of parallel processes for downloading.
-    *   **`gcms`**: A list of Global Climate Models (GCMs) to retrieve data from.
-    *   **`ssps`**: A list of Shared Socioeconomic Pathways (SSPs) scenarios.
-    *   **`url_root`**: The base URL of the CMIP6 data repository.
-2.  **Remote File Discovery:** The script intelligently searches for the correct file names on the remote server based on CMIP6 naming conventions.
-3.  **Parallel Download & Preprocessing:** It downloads the specified data in parallel. During this process, it performs:
-    *   **Clipping:** Subsets the data to the defined `clip_extent`.
-    *   **Preprocessing:** Converts units (e.g., precipitation from kg m-2 s-1 to mm/day, temperature from Kelvin to Celsius) and handles longitude rotation.
-    *   **Saving:** Stores the processed data as NetCDF files in a structured directory format within the `output_dir`.
 
 ### Usage Example
 
