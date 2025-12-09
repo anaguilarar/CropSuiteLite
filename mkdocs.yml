@@ -1,0 +1,58 @@
+site_name: CropSuiteLite Documentation
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - search.highlight
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+  highlightjs: false
+  logo: imgs/atlas-a.svg
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Getting Started:
+      - Getting_Started/download_cmp6.md
+      - Getting_Started/from_climatedata_tocrsdatatype.md
+      - Getting_Started/running_cropsuite.md
+  - Atlas Solutions: 
+      - atlas_solutions/atlas_solution_example.md
+      - atlas_solutions/data_visualization.md
+      - atlas_solutions/supporting_material.md
+
+  - API Reference:
+      - CropSuite Modules: api/modules.md
+
+plugins:
+  - search
+  - macros
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            show_source: falses
+  - table-reader
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      auto_title: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.details
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
