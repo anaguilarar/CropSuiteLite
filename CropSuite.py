@@ -7,6 +7,8 @@ import gc
 import re
 import shutil
 
+from typing import List, Tuple, Union
+
 import numpy as np
 
 from src.read_climate_ini import read_ini_file
@@ -23,9 +25,36 @@ from src.climate_suitability_main_xarray import climate_suitability_xarray
 
 
 class CropSuiteLite():
-    
-    def __init__(self, config_file):
-        assert os.path.exists(config_file), 'The file does not exist'
+    """
+    Main controller for the CropSuiteLite crop suitability modeling framework.
+
+    This class handles configuration loading, data downscaling, tiling strategy,
+    and the execution of climate and crop suitability models.
+
+    Parameters
+    ----------
+    config_file : str
+        Path to the configuration file (.ini or .yaml).
+
+    Attributes
+    ----------
+    config_file : Path
+        Path object to the configuration file.
+    climate_config : dict
+        Dictionary containing parsed configuration parameters.
+    extent : list
+        The spatial extent [min_y, min_x, max_y, max_x].
+    area_name : str
+        Formatted string identifier for the geographic area.
+    output_path : Path
+        Base path for output files.
+    day_interval : int
+        Time step interval for processing.
+    """
+    def __init__(self, config_file: str) -> None:
+        if not os.path.exists(config_file):
+            raise FileNotFoundError(f"The configuration file does not exist: {config_file}")
+        
         self.config_file = config_file
         self.climate_config = read_ini_file(self.config_file)
         
@@ -38,7 +67,19 @@ class CropSuiteLite():
         self.day_interval = self.climate_config['options'].get('day_interval', 1)
         self.plant_data()
         
-    def resampling_env_data(self):
+    def resampling_env_data(self) -> Tuple[List[str], List[str], Union[bool, List[str]], Union[bool, List[str]]]:
+        """
+        Interpolates or retrieves downscaled climate data (precipitation and temperature).
+
+        Returns
+        -------
+        tuple
+            A tuple containing:
+            - List of precipitation file paths.
+            - List of temperature file paths.
+            - List of daily precipitation files (or boolean).
+            - List of daily temperature files (or boolean).
+        """
         
         if not os.path.exists(self._output_dir):
             prec_files, prec_dailyfiles = interpolate_precipitation(self.climate_config, self.extent, self.area_name)
@@ -51,7 +92,15 @@ class CropSuiteLite():
             prec_dailyfiles, temp_dailyfiles = True, True
             return prec_files, temp_files, True, True
         
-    def split_into_tiles(self):
+    def split_into_tiles(self) -> List[List[float]]:
+        """
+        Calculates grid tiling based on available RAM to prevent memory overflow.
+
+        Returns
+        -------
+        list of list of float
+            A list of extents, where each extent is [min_y, min_x, max_y, max_x].
+        """
         final_shape = get_resolution_array(self.climate_config, self.extent, True)
         ram = int((psutil.virtual_memory().total / (1024 ** 3)) * 0.85)
         
@@ -62,25 +111,51 @@ class CropSuiteLite():
         else:
             no_tiles = int(no_tiles_flag)
         
-        def adjust_extent_0(extent, resolution):
-            return extent[2] + ((extent[0] - extent[2]) // resolution ) * resolution
+        # Helper to align extent to resolution
+        def _adjust_lower_bound(ext, res):
+            return ext[2] + ((ext[0] - ext[2]) // res) * res
 
         if final_shape[0] % no_tiles != 0:
             no_tiles = math.ceil(final_shape[0] / (final_shape[0] // no_tiles))
 
         resolution = (self.extent[3] - self.extent[1]) / final_shape[1]
-        self.extent[0] = adjust_extent_0(self.extent, resolution)
+        # NOTE: self.extent is modified here to align with grid
+        self.extent[0] = _adjust_lower_bound(self.extent, resolution)
 
         lst = [i * int(final_shape[0] / no_tiles) for i in range(no_tiles)] + [final_shape[0]]
         extents = [[self.extent[2] + lst[i+1] * resolution, self.extent[1], self.extent[2] + lst[i] * resolution, self.extent[3]]for i in range(no_tiles)]
         
         return extents
 
-    def plant_data(self):
+    def plant_data(self) -> None:
+        """
+        Loads crop parameterization files and interpolation formulas.
+        """
         self.plant_params = read_crop_parameterizations_files(self.climate_config['files']['plant_param_dir'])
         self.plant_params_formulas = get_plant_param_interp_forms_dict(self.plant_params, self.climate_config)
 
-    def compute_climate_suitability(self, extent, prec_files, temp_files, prec_dailyfiles, temp_dailyfiles):
+    def compute_climate_suitability(self, 
+                                  extent: List[float], 
+                                  prec_files: List[str], 
+                                  temp_files: List[str], 
+                                  prec_dailyfiles: Union[bool, List[str]], 
+                                  temp_dailyfiles: Union[bool, List[str]]) -> None:
+        """
+        Calculates climate suitability based on temperature and precipitation.
+
+        Parameters
+        ----------
+        extent : list of float
+            The specific tile extent [y_max, x_min, y_min, x_max].
+        prec_files : list of str
+            Paths to precipitation files.
+        temp_files : list of str
+            Paths to temperature files.
+        prec_dailyfiles : bool or list
+            Daily file indicators or paths.
+        temp_dailyfiles : bool or list
+            Daily file indicators or paths.
+        """
         area_name = f'Area_{int(extent[0])}N{int(extent[1])}E-{int(extent[2])}N{int(extent[3])}E'
         
         if self.climate_config['climatevariability'].get('consider_variability', True):
@@ -113,7 +188,15 @@ class CropSuiteLite():
             gc.collect()
                 
     
-    def compute_crop_suitability(self, extent):
+    def compute_crop_suitability(self, extent: List[float]) -> None:
+        """
+        Combines climate suitability with soil/terrain data to calculate final crop suitability.
+
+        Parameters
+        ----------
+        extent : list of float
+             The specific tile extent.
+        """
         
         ret_paths = [os.path.join(os.path.split(self._temp_path)[0]+'_var', os.path.split(self._temp_path)[1]), os.path.join(os.path.split(self._temp_path)[0]+'_novar', os.path.split(self._temp_path)[1])]
         for temp in ret_paths:
@@ -143,7 +226,15 @@ class CropSuiteLite():
                 
                 cropsuitability(self.climate_config, climsuit, limiting, self.plant_params_formulas, self.plant_params, extent, land_sea_mask, temp)
 
-    def merge_geodata_outputs(self, extents):
+    def merge_geodata_outputs(self, extents: List[List[float]]) -> None:
+        """
+        Merges tiled outputs into a single raster for the entire region.
+
+        Parameters
+        ----------
+        extents : list of list of float
+            List of tile extents used during processing.
+        """
         try:
             out_path = self.climate_config['files']['output_dir']
             if os.path.basename(out_path) == '': out_path = out_path[:-1]
@@ -160,13 +251,23 @@ class CropSuiteLite():
         except:
             return None
             
-    def run(self):
+    def run(self) -> None:
+        """
+        Executes the full CropSuiteLite pipeline.
+        
+        Steps:
+        1. Downscale climate data.
+        2. Split area into tiles based on RAM.
+        3. Iterate through tiles to compute Climate and Crop suitability.
+        4. Merge tiles.
+        5. Clean up temporary files.
+        """
         
         ## interpolate products
         print('\nDownscaling the climate data\n')
-        print(self.output_path)
+        
         self._output_dir = os.path.join(self.output_path+'_downscaled', self.area_name)
-        print(self._output_dir)
+
         prec_files, temp_files, prec_dailyfiles, temp_dailyfiles = self.resampling_env_data()
         
         extents = self.split_into_tiles()
