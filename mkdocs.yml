@@ -29,7 +29,10 @@ nav:
       - atlas_solutions/supporting_material.md
 
   - API Reference:
-      - CropSuite Modules: api/modules.md
+      - CropSuite Modules: 
+        - api/datasets.md
+        - api/main.md
+        - api/solutions.md
 
 plugins:
   - search
