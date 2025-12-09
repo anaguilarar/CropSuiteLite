@@ -1,0 +1,1692 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../data_visualization/">
+      
+      
+        <link rel="next" href="../../api/datasets/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Evidence - CropSuiteLite Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#evidence" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-header__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CropSuiteLite Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Evidence
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Getting_Started/download_cmp6/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../atlas_solution_example/" class="md-tabs__link">
+          
+  
+  
+  Atlas Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/datasets/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-nav__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    CropSuiteLite Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/download_cmp6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download daily climate scenarios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/from_climatedata_tocrsdatatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preprocessing Input Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/running_cropsuite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuiteLite execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas Solutions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atlas Solutions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas_solution_example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas solution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CropSuite Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Main Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="evidence">Evidence<a class="headerlink" href="#evidence" title="Permanent link">&para;</a></h1>
+<p>The <em>Atlas Solutions</em> module is designed to help identify and evaluate adaptation strategies that can mitigate the impacts of climate change on crop suitability.<br />
+Some of these strategies focus on scenarios where improved, more stress-tolerant crop varieties—such as drought-tolerant or heat-tolerant cultivars—are introduced.</p>
+<p>To identify appropriate maximum thresholds for these improved varieties, we performed a two-step evidence review process:</p>
+<ol>
+<li><strong>AI-Assisted Exploration:</strong> An initial literature screening using Large Language Models (LLM) to identify potential crop-specific temperature and precipitation thresholds.</li>
+<li><strong>Manual filtering and validation</strong> of all proposed sources to ensure that only real, scientifically reliable references were included.</li>
+</ol>
+<p>The validated parameters and their corresponding sources are summarized in the table below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Solution_Type_Code</th>
+<th style="text-align: left;">Solution</th>
+<th style="text-align: left;">Solution_Code</th>
+<th style="text-align: left;">Hazard</th>
+<th style="text-align: left;">Crop_Name</th>
+<th style="text-align: left;">Crop_Code</th>
+<th style="text-align: right;">Yield_Effect_Percentage</th>
+<th style="text-align: left;">Reference</th>
+<th style="text-align: left;">Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Maize</td>
+<td style="text-align: left;">c1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">https://doi.org/10.1016/j.landusepol.2019.104091</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Maize</td>
+<td style="text-align: left;">c1</td>
+<td style="text-align: right;">9.09</td>
+<td style="text-align: left;">https://www.sciencedirect.com/science/article/pii/S2212096317300645?via%3Dihub</td>
+<td style="text-align: left;">Accordingly, heat-tolerant varieties had higher (+2 °C) Topt2 and Tmax values than current maize varieties.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Millet</td>
+<td style="text-align: left;">c2</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">https://www.isaaa.org/kc/cropbiotechupdate/article/default.asp?ID=19408</td>
+<td style="text-align: left;">Chakti matures 40 days earlier and has a 30% greater yield compared to local varieties, as well as resistance to downy mildew disease</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Millet</td>
+<td style="text-align: left;">c2</td>
+<td style="text-align: right;">23.81</td>
+<td style="text-align: left;">https://onlinelibrary.wiley.com/doi/10.1111/pce.12931</td>
+<td style="text-align: left;">Butt et al. (2005) projected the impact of climate change scenarios (Hadley Centre Coupled Model and Coupled General Circulation Model) in Mali and showed that grain yield of pearl millet will decrease between 6% and 12%, respectively, without adoption of HT tolerant genotypes; however, with adoption of HT tolerant genotypes, the decreases was smaller and ranged between 0.7% and 8%. he temperature ceiling (where seed yield was almost zero) for season long stress for dwarf pearl millet hybrid identified in this study was 42/22°C, which is relatively higher than other crops</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Wheat</td>
+<td style="text-align: left;">c3</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://www.croptrust.org/news-events/news/new-drought-tolerant-durum-wheat-variety-proves-its-worth-in-morocco/</td>
+<td style="text-align: left;">New variety 'Jawahir' yielded ~1.5 t/ha vs 1.0 t/ha for older variety under drought</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Wheat</td>
+<td style="text-align: left;">c3</td>
+<td style="text-align: right;">11.76</td>
+<td style="text-align: left;">https://e-catalogs.taat-africa.org/com/technologies/heat-and-drought-tolerant-wheat-varieties</td>
+<td style="text-align: left;">They can withstand temperatures that are 4°C higher than normal and show 75% of their yield potential under extreme conditions of less than 200mm of moisture and heat stress.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Rice</td>
+<td style="text-align: left;">c4</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">https://www.cgiar.org/annual-report/performance-report-2019/increased-yield-with-drought-tolerant-rice/</td>
+<td style="text-align: left;">Benin, Madagascar and Nigeria. It was found that the adoption of DTRVs has helped smallholder farmers to increase rice yields by 570 kilograms per hectare, which corresponds to an increase of 24%</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Rice</td>
+<td style="text-align: left;">c4</td>
+<td style="text-align: right;">6.98</td>
+<td style="text-align: left;">https://link.springer.com/article/10.1007/s11027-022-10027-4</td>
+<td style="text-align: left;">Varieties with a 3 °C higher temperature tolerance should be bred and introduced until the 2040s under representative concentration pathways (RCPs) 2.6 and 8.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Beans</td>
+<td style="text-align: left;">c5</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://farmbizafrica.com/high-yielding-drought-resistant-bean-variety-that-matures-in-two-months-is-ready-for-market/</td>
+<td style="text-align: left;">Bean farmers in Kenya can now harvest up to 600kg per acre in just two months, thanks to a new high yielding variety dubbed Kenya Mali or KAT SW-12 launched in the market two years ago, drought due to its deep roots and can grow well in any ecological region in the country</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Beans</td>
+<td style="text-align: left;">c5</td>
+<td style="text-align: right;">11.76</td>
+<td style="text-align: left;">https://allianceforscience.org/blog/2015/04/ciat-scientists-develop-heat-beater-beans-that-could-enhance-food-security/</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Cassava</td>
+<td style="text-align: left;">c6</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: left;">https://www.iita.org/news-item/farmers-get-better-yields-new-drought-tolerant-cassava/</td>
+<td style="text-align: left;">Cassava farmers in the semi-arid zones of sub-Saharan Africa are now enjoying 6-10 times better yields thanks to a new variety developed by IITA that is well-adapted to the dry or drought-prone conditions of the regio</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Cassava</td>
+<td style="text-align: left;">c6</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: left;">https://cropscipublisher.com/index.php/fc/article/html/3872/#:~:text=Cassava%20(Manihot%20esculenta%20Crantz)%20is,duration%20without%20significant%20yield%20compromise.</td>
+<td style="text-align: left;">It can tolerate a temperature level of up to 40 °C, beyond which the rate of photosynthesis may decrease (Pushpalatha and Gangadharan, 2020).</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Coffe Arabica</td>
+<td style="text-align: left;">c7</td>
+<td style="text-align: right;">33.33</td>
+<td style="text-align: left;">https://doi.org/10.1002/agg2.20488</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Coffe Arabica</td>
+<td style="text-align: left;">c7</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">Indigenous to Guinea, Sierra Leone and Ivory Coast, stenophylla grows in hot-tropical locations at low elevations. After collecting data for the main coffee crop species (Arabica, robusta, and Liberica), we were able to better understand their key climate requirements and compare them to stenophylla. Our results showed that stenophylla has mean annual temperature requirement of 24.9⁰C, which is 1.9⁰C higher than robusta, and a staggering 6.2–6.8 ⁰C higher than Arabica.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Tea</td>
+<td style="text-align: left;">c8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://www.reuters.com/article/business/finance/kenyas-new-purple-tea-will-be-good-for-you-idUSJOE72609M</td>
+<td style="text-align: left;">Kenya launched two new tea clones last year that are tougher in drought. The research foundation said the two, TRFK 371/3 and TRFK 430/90, yield about 50 percent more</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Tea</td>
+<td style="text-align: left;">c8</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Cocoa</td>
+<td style="text-align: left;">c9</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">https://farmonaut.com/africa/sustainable-cocoa-production-7-powerful-solutions-in-ghana</td>
+<td style="text-align: left;">Disease-tolerant, drought-resistant hybrids</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Cocoa</td>
+<td style="text-align: left;">c9</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Sugarcane</td>
+<td style="text-align: left;">c10</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: left;">https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2022.963377/full</td>
+<td style="text-align: left;">These transgenic plants exhibit obvious improvements in yield performance and various physiological traits under the limited-irrigation condition in the field, such as increasing 41.9% yield and 44.4% the number of ratooning sugarcane seedlings.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Sugarcane</td>
+<td style="text-align: left;">c10</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Cotton</td>
+<td style="text-align: left;">c11</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4944377</td>
+<td style="text-align: left;">Breeding trials identified genotypes combining high yield with drought resistance (improved yields in drought by ~30%)papers.ssrn.com</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Cotton</td>
+<td style="text-align: left;">c11</td>
+<td style="text-align: right;">17.9</td>
+<td style="text-align: left;">https://www.researchgate.net/profile/Abdul-Wahab-Soomro/publication/358477621_CHARACTERIZATION_AND_PERFORMANCE_OF_CRIS-543_HIGH_YIELDING_AND_HEAT_TOLERANT_COTTON_VARIETY/links/6204058a4d47431e1f513126/CHARACTERIZATION-AND-PERFORMANCE-OF-CRIS-543-HIGH-YIELDING-AND-HEAT-TOLERANT-COTTON-VARIETY.pdf</td>
+<td style="text-align: left;">In Sindh (Pakistan), the heat-tolerant cotton CV CRIS-543 yielded ~4.0 t/ha seed cotton, about 20% higher than the local check (3.3–3.4 t/ha) in multi-year trialsresearchgate.net. It performs well in hot, arid zones where traditional varieties suffer heat-induced fruit shedding</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Soybean</td>
+<td style="text-align: left;">c12</td>
+<td style="text-align: right;">14.28</td>
+<td style="text-align: left;">https://agresearchmag.ars.usda.gov/2008/nov/soybean</td>
+<td style="text-align: left;">The slow-wilting lines yield 4 to 8 bushels more than conventional varieties under drought conditions—depending on the region and environment, says Carter. For example, under drought conditions, normal soybeans yield 30 bushels per acre, but slow-wilting types yield about 35 bushels per acre.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Soybean</td>
+<td style="text-align: left;">c12</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">https://www.nature.com/articles/s41598-023-28354-0</td>
+<td style="text-align: left;">When averaged across cultivars, drought stress significantly decreased seed number (46%) and weight (35%) compared to the control.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Banana</td>
+<td style="text-align: left;">c13</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: left;">https://allianceforscience.org/blog/2021/06/east-africas-banana-farmers-welcome-new-varieties-that-resist-disease-and-drought/</td>
+<td style="text-align: left;">In addition to disease-resistance, the new hybrids are better adapted to drought and have more leaf cover. They also increase yields four-fold and taste much like popular local varieties, making them well-suited to long-lasting plantations and improving food security, researchers said.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Banana</td>
+<td style="text-align: left;">c13</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Sunflower</td>
+<td style="text-align: left;">c14</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: left;">https://www.researchgate.net/publication/287107572_DROUGHT_EFFECTS_ON_YIELD_TRAITS_OF_SOME_SUNFLOWER_INBRED_LINES ;</td>
+<td style="text-align: left;">Drought tolerance of maleinbred lines against stress conditions changed between 50-100% in 1000 seedweight and 70-100% in oil yield. ;</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Sunflower</td>
+<td style="text-align: left;">c14</td>
+<td style="text-align: right;">28.57</td>
+<td style="text-align: left;">https://www.nature.com/articles/s41598-021-81072-3</td>
+<td style="text-align: left;">Heat stress treatment was applied by growing sunflower germplasm at 42 °C and osmotic stress by adding polyethylene glycol 8000 which decreased the osmotic potential to − 0.6 MPa</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Sesame</td>
+<td style="text-align: left;">c15</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://www.nab.com.na/wp-content/uploads/2023/08/EVALUATION-OF-SESAME-VARIETIES-IN-NAMIBIA-Report-of-2022-NAB-2023.pdf</td>
+<td style="text-align: left;">It is not directly linked</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Sesame</td>
+<td style="text-align: left;">c15</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Oilpalm</td>
+<td style="text-align: left;">c16</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Oilpalm</td>
+<td style="text-align: left;">c16</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Rapeseed</td>
+<td style="text-align: left;">c17</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Rapeseed</td>
+<td style="text-align: left;">c17</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Barley</td>
+<td style="text-align: left;">c21</td>
+<td style="text-align: right;">375</td>
+<td style="text-align: left;">https://qcat.wocat.net/en/wocat/technologies/view/technologies_6739/</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Barley</td>
+<td style="text-align: left;">c21</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">https://www.sciencedaily.com/releases/2019/07/190710121545.htm</td>
+<td style="text-align: left;">And this is all well worth the effort: even under adverse conditions, Halle's best barley produced up to 20 percent higher yields than native plants</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Chickpea</td>
+<td style="text-align: left;">c22</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">https://www.cgiar.org/news-events/news/first-ever-high-yielding-chickpea-variety-developed-using-marker-assisted-backcrossing-mabc-released-in-ethiopia/</td>
+<td style="text-align: left;">The variety delivered the highest grain yield of 3822 kg/ha at Arsi Robe, Ethiopia, which translates into an yield advantage of 15% over the check variety ‘Teketay’ and 78% more than the local check.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Chickpea</td>
+<td style="text-align: left;">c22</td>
+<td style="text-align: right;">26.32</td>
+<td style="text-align: left;">https://phys.org/news/2019-04-breakthrough-high-yield-drought-resilient-chickpeas.html</td>
+<td style="text-align: left;">tolerate temperatures up to 38 degrees Celsius and provide higher yields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Coconut</td>
+<td style="text-align: left;">c23</td>
+<td style="text-align: right;">10.89</td>
+<td style="text-align: left;">https://www.sciencedirect.com/science/article/abs/pii/S0304423821003277?via%3Dihub</td>
+<td style="text-align: left;">AS showed a significantly (P &lt; 0.05) higher yield (101 nuts/palm/year) compared to CRIC60 (90 nuts/palm/year)</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Coconut</td>
+<td style="text-align: left;">c23</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">https://cocos.sljol.info/articles/10.4038/cocos.v19i1.4748</td>
+<td style="text-align: left;">Pollen germination Tmax</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Pigeonpea</td>
+<td style="text-align: left;">c25</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">https://oar.icrisat.org/10587/1/icrisat-is-pigeonpea-hybrid.pdf</td>
+<td style="text-align: left;">ICPH 8, the world’s first pigeonpea hybrid, was released jointly by ICRISAT and ICAR in 1991. The hybrid yields 25-30% more than pure line cultivars in farmers’ fields. Moreover, it is drought-tolerant.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Pigeonpea</td>
+<td style="text-align: left;">c25</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Tobacco</td>
+<td style="text-align: left;">c26</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">https://www.coresta.org/sites/default/files/abstracts/2016_AP39_Magama.pdf</td>
+<td style="text-align: left;">In D, T75 yielded ~ 30% &amp; 20% higher than K RK26 &amp; K RK66 resp. in SMF</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Tobacco</td>
+<td style="text-align: left;">c26</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Onion</td>
+<td style="text-align: left;">c27</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2021.600371/full</td>
+<td style="text-align: left;">Tolerant genotypes, viz. Acc. 1656, Acc. 1658, W-009, and W-085, had higher DTE (&gt;90%), fewer yield losses (&lt;20%), and performed superiorly for different traits under drought stress.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Onion</td>
+<td style="text-align: left;">c27</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Tomato</td>
+<td style="text-align: left;">c28</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://www.afhu.org/2023/04/19/researchers-develop-new-drought-tolerant-variety-of-tomatoes/</td>
+<td style="text-align: left;">The researchers identified interactions between two regions of the tomato genome that resulted in a 20-50% increase in the overall tomato yield under irrigated conditions as well as in droughts</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Tomato</td>
+<td style="text-align: left;">c28</td>
+<td style="text-align: right;">7.89</td>
+<td style="text-align: left;">https://www.sciencedirect.com/science/article/abs/pii/S0304423823006040#:~:text=HS%20causes%20wilting%2C%20leaf%20senescence,possible%20solutions%20to%20overcome%20them.</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Rubber</td>
+<td style="text-align: left;">c29</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">https://pdfs.semanticscholar.org/6f43/9828f2b68c8fd2e4c5b55a22bdd9201556e1.pdf</td>
+<td style="text-align: left;">IAC 500 series clones yielded 66.8 g/tapping vs 48.7 g for drought-tolerant check RRIM 600pdfs.semanticscholar.org; RRIM 600 is widely used in drought-prone areaspmc.ncbi.nlm.nih.gov.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Rubber</td>
+<td style="text-align: left;">c29</td>
+<td style="text-align: right;">13.42</td>
+<td style="text-align: left;">https://academic.oup.com/treephys/article-abstract/44/3/tpae022/7607187?redirectedFrom=fulltext</td>
+<td style="text-align: left;">The range of T50 observed (42.9–46.2 °C) is well above the current maximum air temperatures Tmax,obs (T50 − Tmax,obs &gt;5.8 °C), suggesting that H. brasiliensis is likely thermally safe in this south-east Asian region of Malaysia.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Cofferobusta</td>
+<td style="text-align: left;">c30</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">https://coffeefactz.com/robusta-coffee-breeding-breakthrough/</td>
+<td style="text-align: left;">Nestlé has also reported progress, creating two non-GMO robusta varieties that yield up to 50% more beans per tree</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Cofferobusta</td>
+<td style="text-align: left;">c30</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Groundnut</td>
+<td style="text-align: left;">c31</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">https://www.slideshare.net/slideshow/poster-drought-tolerant-groundnut/48138225</td>
+<td style="text-align: left;">ICGV 91114 groundnut yields ~23% more than the old variety (TMV 2) in drought-prone areas:contentReference[oaicite:30]{index=30} (robust field impact)</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Groundnut</td>
+<td style="text-align: left;">c31</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Yam</td>
+<td style="text-align: left;">c32</td>
+<td style="text-align: right;">22.33</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">Tubers same as potato values</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Yam</td>
+<td style="text-align: left;">c32</td>
+<td style="text-align: right;">14.29</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Potato</td>
+<td style="text-align: left;">c33</td>
+<td style="text-align: right;">22.33</td>
+<td style="text-align: left;">https://cipotato.org/agile-potato-for-asia/drought-resistant-potato-research-across-cip-aligns-un-observance-desertification/</td>
+<td style="text-align: left;">“Some farmers obtained tuber yield over 30 ton/ha,” compared to 23 ton/ha of national average production</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Potato</td>
+<td style="text-align: left;">c33</td>
+<td style="text-align: right;">14.29</td>
+<td style="text-align: left;">https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2024.1364244/full</td>
+<td style="text-align: left;">nan</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Sorghum</td>
+<td style="text-align: left;">c34</td>
+<td style="text-align: right;">29.41</td>
+<td style="text-align: left;">https://www.mdpi.com/2073-4395/13/2/557</td>
+<td style="text-align: left;">The highest grain yield recorded was at 3.91 t/ha for G144 (Kaura Short Panicle-1) and 3.86 t/ha for G56 (CSRO1) which were above the mean grain yield (2.68 t/ha).</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Sorghum</td>
+<td style="text-align: left;">c34</td>
+<td style="text-align: right;">6.25</td>
+<td style="text-align: left;">https://www.gjournals.org/2024/09/17/091424113-belay/</td>
+<td style="text-align: left;">Genotypic mean grain yield ranged from 1730 to 3650 kg ha-1 with average mean grain yield of 2421 kg ha-1, while environment ranged from 1670 to 3422 kg ha-1.</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Drought-tolerant varieties</td>
+<td style="text-align: left;">s1</td>
+<td style="text-align: left;">Drought</td>
+<td style="text-align: left;">Cowpea</td>
+<td style="text-align: left;">c35</td>
+<td style="text-align: right;">106.89</td>
+<td style="text-align: left;">https://tropicallegumeshub.com/wp-content/uploads/2020/06/Seven_Seasons_Of_Learnings-05_Boukar_et_al.pdf</td>
+<td style="text-align: left;">Table 24. Cowpea varieties released in different countries</td>
+</tr>
+<tr>
+<td style="text-align: left;">st1</td>
+<td style="text-align: left;">Heat-tolerant varieties</td>
+<td style="text-align: left;">s2</td>
+<td style="text-align: left;">Heat</td>
+<td style="text-align: left;">Cowpea</td>
+<td style="text-align: left;">c35</td>
+<td style="text-align: right;">nan</td>
+<td style="text-align: left;">nan</td>
+<td style="text-align: left;">nan</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

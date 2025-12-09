@@ -13,7 +13,7 @@ Most baseline membership functions are defined according to [Sys et al. (1993)](
 Here are some examples of the original membership functions:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction.png" alt="Membership functions" width="60%">
+  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction.png" alt="Membership functions" width="80%">
   <br>
   <em>Figure 1. Membership functions</em>
 </p>
@@ -64,7 +64,7 @@ cs.plot_solutions_profiles(scenario_values=solution_parameter, suit_values = par
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction_sol.png" alt="solution_membership" width="80%">
+  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction_sol.png" alt="solution_membership" width="90%">
   <br>
   <em>Figure 1. Membership functions modified for droguth (left) and heat (rigth) tolerant varieties</em>
 </p>

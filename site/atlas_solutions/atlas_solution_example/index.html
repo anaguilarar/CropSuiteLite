@@ -1,0 +1,1352 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Getting_Started/running_cropsuite/">
+      
+      
+        <link rel="next" href="../data_visualization/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Atlas solution - CropSuiteLite Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#atlas-solution" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-header__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CropSuiteLite Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Atlas solution
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Getting_Started/download_cmp6/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Atlas Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/datasets/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-nav__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    CropSuiteLite Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/download_cmp6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download daily climate scenarios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/from_climatedata_tocrsdatatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preprocessing Input Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Getting_Started/running_cropsuite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuiteLite execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas Solutions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atlas Solutions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas solution
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas solution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-membership-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Membership functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Membership functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simulating-improved-varieties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulating Improved Varieties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visualization-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Visualization Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Visualization Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-baseline-vs-adapted-curves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting Baseline vs. Adapted Curves
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-automated-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Automated Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Automated Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-response-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Response Factors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-the-configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modify the configuration file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supporting_material/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CropSuite Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Main Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-membership-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Membership functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Membership functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simulating-improved-varieties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulating Improved Varieties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visualization-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Visualization Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Visualization Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-baseline-vs-adapted-curves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting Baseline vs. Adapted Curves
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-automated-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Automated Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Automated Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-response-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Response Factors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-the-configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modify the configuration file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="atlas-solution">Atlas solution<a class="headerlink" href="#atlas-solution" title="Permanent link">&para;</a></h1>
+<p>The <strong>Atlas Solutions</strong> module evaluates adaptation strategies designed to mitigate the impacts of climate change on crop suitability.</p>
+<p>One example of such a strategy is the simulation of <em>improved crop varieties</em>, specifically cultivars bre for enhanced tolerance to drought or heat stress.
+This module quantifies how adopting these resilient varieties alters the suitability landscape compared to baseline crops.</p>
+<h2 id="1-membership-functions">1. Membership functions<a class="headerlink" href="#1-membership-functions" title="Permanent link">&para;</a></h2>
+<p>CropSuite uses a fuzzy-logic approach based on <em>Liebig’s Law of the Minimum</em>. Suitability is assessed using crop-specific that map abiotic conditions (e.g., temperature, precipitation, soil properties) to a suitability score ranging from <strong>0 (Not Suitable)</strong> to <strong>1 (Highly Suitable)</strong>.</p>
+<p>Most baseline membership functions are defined according to <a href="https://www.researchgate.net/publication/324330469_Land_Evaluation_Part_3_Crop_Requirements">Sys et al. (1993)</a>.</p>
+<p>Here are some examples of the original membership functions:</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction.png" alt="Membership functions" width="80%">
+  <br>
+  <em>Figure 1. Membership functions</em>
+</p>
+
+<p>Each plot can be obtained using the following code</p>
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.membership_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">CropSensitivity</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">cs</span> <span class="o">=</span> <span class="n">CropSensitivity</span><span class="p">(</span><span class="s1">&#39;coffeearabica&#39;</span><span class="p">,</span> <span class="s1">&#39;plant_params/available&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">cs</span><span class="o">.</span><span class="n">plot_solutions_profiles</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;prec&#39;</span><span class="p">,</span> <span class="n">labelsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">add_solution</span><span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="simulating-improved-varieties">Simulating Improved Varieties<a class="headerlink" href="#simulating-improved-varieties" title="Permanent link">&para;</a></h3>
+<p>To represent the effect of improved cultivars, this module allows to modify the membership functions for temperature and precipitation.</p>
+<ul>
+<li>
+<p>Heat Tolerance: The maximum temperature threshold of the function is increased (multiplied by a percentage factor), assuming the new variety can tolerate higher temperatures.</p>
+</li>
+<li>
+<p>Drought Tolerance: For drought-tolerant varieties, the adjustment is done on the minimun suitability values, increasing the tolerance of the plant to water scarcity.</p>
+</li>
+</ul>
+<h2 id="2-visualization-tools">2. Visualization Tools<a class="headerlink" href="#2-visualization-tools" title="Permanent link">&para;</a></h2>
+<p>The module allows you to visualize how these "Solutions" modify the crop requirements.</p>
+<h3 id="plotting-baseline-vs-adapted-curves">Plotting Baseline vs. Adapted Curves<a class="headerlink" href="#plotting-baseline-vs-adapted-curves" title="Permanent link">&para;</a></h3>
+<p>The following code demonstrates how to modify and plot the membership functions.
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">solutions.membership_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">CropSensitivity</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">cs</span> <span class="o">=</span> <span class="n">CropSensitivity</span><span class="p">(</span><span class="s1">&#39;beans&#39;</span><span class="p">,</span> <span class="s1">&#39;plant_params/available&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">cs</span><span class="o">.</span><span class="n">read_crop_configuration</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">solution_parameter</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># set meteorological variable</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">variable</span> <span class="o">=</span> <span class="s1">&#39;prec&#39;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># modify the membership functions using a precentage</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">if</span> <span class="n">variable</span> <span class="o">==</span> <span class="s1">&#39;temp&#39;</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">parameter_suit</span><span class="p">,</span> <span class="n">new_param_vals</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">create_new_max_parameter_values</span><span class="p">(</span>  <span class="n">parameter</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span><span class="n">new_max</span><span class="o">=</span><span class="mf">11.7</span><span class="p">,</span> <span class="n">percentage</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">parameter_suit</span><span class="p">,</span> <span class="n">new_param_vals</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">multiply_suit_vals</span><span class="p">(</span><span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;prec&#39;</span><span class="p">,</span><span class="n">perc_factor</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">solution_parameter</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s1">_1&#39;</span><span class="p">:</span><span class="n">new_param_vals</span><span class="p">})</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># plot</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">cs</span><span class="o">.</span><span class="n">plot_solutions_profiles</span><span class="p">(</span><span class="n">scenario_values</span><span class="o">=</span><span class="n">solution_parameter</span><span class="p">,</span> <span class="n">suit_values</span> <span class="o">=</span> <span class="n">parameter_suit</span><span class="p">,</span> <span class="n">labelsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">add_solution</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/imgs/as_membershipfunction_sol.png" alt="solution_membership" width="90%">
+  <br>
+  <em>Figure 1. Membership functions modified for droguth (left) and heat (rigth) tolerant varieties</em>
+</p>
+
+<h2 id="3-automated-workflow">3. Automated Workflow<a class="headerlink" href="#3-automated-workflow" title="Permanent link">&para;</a></h2>
+<p>To obtain the crop suitability maps can be obtained automatically by changing the configuration files</p>
+<h3 id="define-response-factors">Define Response Factors<a class="headerlink" href="#define-response-factors" title="Permanent link">&para;</a></h3>
+<p>The yaml file <code>yaml_configurations\response_functions.yaml</code> contains the percentage adjustment factors used to modify the membership functions for each crop–solution combination. These values are based on scientific evidence regarding stress-tolerant varieties (see the Evidence section). These values are based on scientific evidence regarding stress-tolerant varieties (see the Evidence section).</p>
+<p>It also defines the codes used to identify crops and solution types.  Currently there are available 26 crops. </p>
+<p>This is an example of the file's content
+<div class="highlight"><span class="filename">YAML</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">SOLUTIONS_TYPE</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">ST1</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Croop</span><span class="nv"> </span><span class="s">Breeding&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">SOLUTIONS_CODE</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">s1</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Drought-tolerant</span><span class="nv"> </span><span class="s">varieties&#39;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">s2</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Heat-tolerant</span><span class="nv"> </span><span class="s">varieties&#39;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nt">CROPS</span><span class="p">:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="nt">c1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">maize</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="nt">c2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">millet</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">c3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wheat</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="nt">c4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rice</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nt">ST1</span><span class="p">:</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="nt">s1</span><span class="p">:</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="nt">c1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">15</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">c2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">30</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="nt">c3</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">50</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nt">c4</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">24</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">  </span><span class="nt">s2</span><span class="p">:</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="nt">c1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">9.1</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="nt">c2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">23.8</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="nt">c3</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">11.8</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">    </span><span class="nt">c4</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">7</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span><span class="nt">c5</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">11.7</span><span class="p p-Indicator">]</span>
+</code></pre></div></p>
+<h3 id="modify-the-configuration-file">Modify the configuration file<a class="headerlink" href="#modify-the-configuration-file" title="Permanent link">&para;</a></h3>
+<p>To execute a batch run, modify <code>yaml_configurations/general_config_solutions.yaml</code>. Update the SOLUTIONS section to specify which strategies and crops to process.</p>
+<p>Three elements can be configured:</p>
+<ul>
+<li>
+<p>solutions_path → path to the YAML file containing modification factors</p>
+</li>
+<li>
+<p>solution_codes → list of solution types to apply</p>
+</li>
+<li>
+<p>crop_codes → list of crops to evaluate</p>
+</li>
+</ul>
+<div class="highlight"><span class="filename">YAML</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">SOLUTIONS</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">solutions_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;yaml_configurations/response_functions.yaml&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">solution_codes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;s1&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;s2&#39;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">crop_codes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;c1&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;c2&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;c3&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h3 id="execution">Execution<a class="headerlink" href="#execution" title="Permanent link">&para;</a></h3>
+<p>Once the YAML is configured, run the full pipeline from the command line:</p>
+<div class="highlight"><span class="filename">Bash</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>run_cropsuitelite.py<span class="w"> </span>-config<span class="w"> </span>yaml_configurations/general_config_solutions.yaml
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

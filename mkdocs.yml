@@ -37,13 +37,13 @@ nav:
 plugins:
   - search
   - macros
+  - table-reader
   - mkdocstrings:
       handlers:
         python:
           options:
             docstring_style: numpy
-            show_source: falses
-  - table-reader
+            show_source: false
 
 markdown_extensions:
   - admonition
