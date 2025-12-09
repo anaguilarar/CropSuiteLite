@@ -26,7 +26,7 @@ jobs:
           path: .cache
           restore-keys: mkdocs-material-
       - run:
-          pip install mkdocs-material mkdocs mkdocstrings[python] mkdocs-table-reader-plugin mkdocs-macros-plugin pymdown-extensions highlightjs 
+          pip install mkdocs-material mkdocs mkdocstrings[python] mkdocs-table-reader-plugin mkdocs-macros-plugin pymdown-extensions 
       - run:
           mkdocs gh-deploy --force --clean
 
