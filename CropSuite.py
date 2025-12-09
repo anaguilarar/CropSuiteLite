@@ -116,7 +116,7 @@ class CropSuiteLite():
     def compute_crop_suitability(self, extent):
         
         ret_paths = [os.path.join(os.path.split(self._temp_path)[0]+'_var', os.path.split(self._temp_path)[1]), os.path.join(os.path.split(self._temp_path)[0]+'_novar', os.path.split(self._temp_path)[1])]
-        for _, temp in enumerate(ret_paths):
+        for temp in ret_paths:
             if os.path.exists(temp):
                 climsuit = np.dstack([
                     load_specified_lines(

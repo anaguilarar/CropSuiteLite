@@ -7,7 +7,9 @@ SOLUTIONS_CODE:
   s1: 'Drought-tolerant varieties'
   s2: 'Heat-tolerant varieties'
   s3: 'Adjusted planting dates'
-  
+  s22: 'Conservation agriculture (reduced tillage, residue, rotation)'
+  s25: 'Soil organic matter management (compost, manure, biochar)'
+    
 CROPS:
   c1: maize
   c2: millet
@@ -97,3 +99,27 @@ ST1:
     c33: [14.3]
     c34: [6.2]
     c35: []
+
+ST2:
+  s3:
+    c1: [0, 12]
+    c3: [0, 12]
+    c4: [0, 12]
+    c12: [0, 12]
+    c34: [0, 12]
+
+  s5: 
+    c4: [0, 50]
+
+  s21:
+    c5: [0, 37.5]
+  
+  s22:
+    c1: [0, 31.5]
+    c5: [0, 0]
+  
+  s25:
+    c1: [0, 26]
+  
+  s26:
+    c11: [15.2, 0]

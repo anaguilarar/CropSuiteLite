@@ -1,6 +1,11 @@
 import copy
 import os
+import yaml
+from typing import List
+        
 import numpy as np
+
+from .utils import find_solution_type
 
 class CropSensitivity():
     """
@@ -248,9 +253,15 @@ class CropSensitivity():
             self.write_configuration(os.path.join(output_path, f'{nametoexport}.inf'))    
             self.params = params_copy
         
-    def plot_solutions_profiles(self, scenario_values, suit_values = None, output_fig_path:str = None):
+    def plot_solutions_profiles(self, scenario_values = None, variable = None, suit_values = None, output_fig_path:str = None, add_solution = True, labelsize = 15, figsize=(10, 5.5)):
         import matplotlib.pyplot as plt
-        param_tochange = list(scenario_values.keys())[0].split('_')[0]
+        
+        if variable is not None:
+            param_tochange = variable
+        elif variable is None and scenario_values is not None:
+            param_tochange = list(scenario_values.keys())[0].split('_')[0]
+        else:
+            raise ValueError('you must provided either variable or scenario values')
         
         limit = 'Min' if param_tochange == 'prec' else 'Max'
         unit = 'mm' if param_tochange == 'prec' else '°C'
@@ -258,6 +269,8 @@ class CropSensitivity():
         colors = ['green', 'purple', 'red']
         
         vals_orig, suit_orig = self.params[f'{param_tochange}_vals'], self.params[f'{param_tochange}_suit']
+        if suit_values is None: suit_values = suit_orig
+            
         ref_val = vals_orig[0] if param_tochange == 'prec' else vals_orig[::-1][0]
         
         opt_val = vals_orig[np.argmax(suit_orig)]
@@ -265,21 +278,166 @@ class CropSensitivity():
         template_label = '{name}: (Opt: {opt_val:.2f} {unit}, {limit}: {ref_val:.2f} {unit})'
         orig_label = template_label.format(name= 'Original', opt_val = opt_val, unit = unit, 
                                                                                     limit = limit, ref_val = ref_val)
-
-        plt.figure(figsize=(10, 5.5))
+        plt.figure(figsize = figsize)
         plt.plot(vals_orig, suit_orig, 'o-', label=orig_label, color='blue')
-        for i, (k, v) in enumerate(scenario_values.items()):
-            opt_val = v[np.argmax(suit_orig)]
-            ref_val = v[0] if param_tochange == 'prec' else v[::-1][0]
-            tmp_label = template_label.format(name = k, opt_val = opt_val, unit = unit, limit = limit, ref_val = ref_val)
-            
-            plt.plot(v, suit_values, '^--', label=tmp_label, color=colors[i])
+        if add_solution and scenario_values is not None:
+            print(param_tochange)
+            for i, (k, v) in enumerate(scenario_values.items()):
+                opt_val = v[np.argmax(suit_orig)]
+                ref_val = v[0] if param_tochange == 'prec' else v[::-1][0]
+                tmp_label = template_label.format(name = k, opt_val = opt_val, unit = unit, limit = limit, ref_val = ref_val)
+                
+                plt.plot(v, suit_values, '^--', label=tmp_label, color=colors[i])
 
-        plt.xlabel('Precipitation (mm)' if param_tochange == 'prec' else 'Temperature (°C)')
-        plt.ylabel('Suitability Score')
+        plt.xlabel('Precipitation (mm)' if param_tochange == 'prec' else 'Temperature (°C)', fontsize = labelsize, fontweight='bold')
+        plt.ylabel('Suitability Score', fontsize = labelsize, fontweight='bold')
         plt.grid(True, linestyle='--', alpha=0.6)
+        plt.title(self.crop.title(), fontsize = int(labelsize*1.3), fontweight='bold')
         plt.legend()
+        plt.tick_params(axis='both', which='major', labelsize=int(labelsize*0.8))
+        
         if output_fig_path:
             plt.savefig(output_fig_path)
         else:
             plt.show()
+
+def change_otherst_parameters(thresholds: List, crops_params: CropSensitivity, v2 = True):
+    
+    new_params = None
+    solution_parameter = {}
+    
+    i = 0 
+    if thresholds[0] != 0:
+        upperlimit_temp = thresholds[0]
+        vals_orig = crops_params.params['temp_vals']
+        maxtmp = vals_orig[::-1][0]
+        new_maxtemp = maxtmp * (1+(upperlimit_temp/100))
+        #new_maxtemp = maxtmp + upperlimit_temp
+        suit_vals, new_params = crops_params.create_new_max_parameter_values(parameter='temp',new_max=new_maxtemp, percentage = False)
+        solution_parameter[f'temp_{i+1}'] = new_params
+        i +=1 
+    
+    if thresholds[1] != 0:
+        lowerlimit_prec = thresholds[1]
+        vals_orig = crops_params.params['prec_vals']
+
+        print('--> lowerlimit_prec: ', lowerlimit_prec)
+        suit_vals, new_params = crops_params.multiply_suit_vals('prec', lowerlimit_prec)
+        #suit_vals, new_params = crops_params.create_new_min_parameter_valuesv2(parameter='prec',new_min=lowerlimit_prec/100)
+        solution_parameter[f'prec_{i+1}'] = new_params
+    
+    return solution_parameter, suit_vals
+
+def solution_dict_query(response_function_file: str, solution_code: str):
+    assert os.path.exists(response_function_file), 'the file path does not exist'
+    
+    dict_query = {'crop':str  ,
+                'solution_type':str,
+                'solution': str,
+                'thresholds': List,
+                }
+    
+    with open(response_function_file, 'r') as file:
+        sol_config_dict = yaml.safe_load(file)
+    
+    solution_type_code, solution_code, crop_code = solution_code.split('_')
+    
+    print(solution_type_code, solution_code, crop_code)
+    
+    solution_type = sol_config_dict['SOLUTIONS_TYPE'].get(solution_type_code, None)
+    solution = sol_config_dict['SOLUTIONS_CODE'].get(solution_code, None)
+    crop_str = sol_config_dict['CROPS'].get(crop_code, None)
+    threshold = None if solution is None else sol_config_dict[solution_type_code][solution_code][crop_code]
+    
+    dict_query.update({'crop': crop_str,
+                    'solution_type': solution_type,
+                    'solution':  solution,
+                    'crop': crop_str,
+                    'thresholds':threshold})
+    return  dict_query
+
+def change_st1_parameter(solution: str, thresholds: List, crops_params: CropSensitivity, v2 = True):
+    
+    new_params = None
+    solution_parameter = {}
+    
+    for i in range(len(thresholds)):
+        if 'heat' in solution.lower():
+            upperlimit_temp = thresholds[i]
+            
+            vals_orig = crops_params.params['temp_vals']
+            maxtmp = vals_orig[::-1][0]
+            new_maxtemp = maxtmp * (1+(upperlimit_temp/100))
+
+            #new_maxtemp = maxtmp + upperlimit_temp
+            suit_vals, new_params = crops_params.create_new_max_parameter_values(parameter='temp',new_max=new_maxtemp, percentage = False)
+            
+            solution_parameter[f'temp_{i+1}'] = new_params
+            
+        elif 'drought' in solution.lower():
+            lowerlimit_prec = thresholds[i]
+            vals_orig = crops_params.params['prec_vals']
+            minprec = vals_orig[0]
+            new_minprec = max(minprec - (minprec * lowerlimit_prec/100), 0)
+            if v2: 
+                print('--> lowerlimit_prec: ', lowerlimit_prec)
+                suit_vals, new_params = crops_params.multiply_suit_vals('prec', lowerlimit_prec)
+                #suit_vals, new_params = crops_params.create_new_min_parameter_valuesv2(parameter='prec',new_min=lowerlimit_prec/100)
+            else:
+                suit_vals, new_params = crops_params.create_new_min_parameter_values(parameter='prec',new_min=new_minprec)
+            
+            solution_parameter[f'prec_{i+1}'] = new_params
+            
+    return solution_parameter, suit_vals
+
+def create_crop_parameters(config_dict):
+    
+    solution_codes = config_dict['SOLUTIONS'].get('solution_codes')
+    crop_codes = config_dict['SOLUTIONS'].get('crop_codes')
+    solutions_path = config_dict['SOLUTIONS'].get('solutions_path')
+    plant_params_input = config_dict['GENERAL'].get('plant_param_dir', 'plant_params/available')
+    plant_params_output = config_dict['GENERAL'].get('plant_params_output', 'plant_params')
+    if not os.path.exists(plant_params_output): os.mkdir(plant_params_output)    
+    if len(solution_codes):
+        for crop_code in crop_codes:
+            
+            for i, sol_code in enumerate(solution_codes):
+                solution_type = find_solution_type(sol_code)
+                print('solution_type --> ',solution_type)
+
+                if solution_type is None: continue
+                
+                solution_to_implement = f'{solution_type}_{sol_code}_{crop_code}'
+
+                solution_implementation = solution_dict_query(solutions_path, solution_to_implement)
+                print(solution_implementation)
+                crops_params = CropSensitivity(crop = solution_implementation['crop'], 
+                                            parameters_path = plant_params_input)
+                crops_params.read_crop_configuration()
+                crops_params.remove_crop_lethal_conditions()
+                if len(solution_implementation['thresholds']):
+                    if solution_type == 'ST1':
+                        sv, suit_vals = change_st1_parameter(solution_implementation['solution'],solution_implementation['thresholds'],  crops_params, v2 = True)
+                    else:
+                        sv, suit_vals = change_otherst_parameters(solution_implementation['thresholds'],  crops_params)
+                        
+                    crops_params.plot_solutions_profiles(sv, suit_values = suit_vals, output_fig_path=os.path.join(plant_params_output,f'{solution_to_implement}.png'))
+                    crops_params.export_crop_params(sv, plant_params_output, suit_vals = suit_vals, export_original = i == 0, code = solution_to_implement)
+                    with open(os.path.join(plant_params_output, f'{solution_to_implement}.yaml'), 'w') as file:
+                        yaml.dump(solution_implementation, file, default_flow_style=False)
+    else:
+        for crop_code in crop_codes:
+            solution_to_implement = f'ST1_null_{crop_code}'
+            solution_implementation = solution_dict_query(solutions_path, solution_to_implement)
+            cname = solution_implementation['crop']
+            crops_params = CropSensitivity(crop = cname, 
+                                            parameters_path = plant_params_input)
+            crops_params.read_crop_configuration()
+            crops_params.remove_crop_lethal_conditions()
+            #crops_params.export_crop_params(sv, plant_params_output, suit_vals = suit_vals, export_original = i == 0, code = solution_to_implement)
+            crops_params.write_configuration(os.path.join(plant_params_output, f'{cname}.inf'))
+
+        print(solution_implementation)
+        
+
+

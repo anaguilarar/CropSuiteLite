@@ -1,0 +1,30 @@
+GENERAL_INFO:
+  process_climate: True
+  process_soil: False
+  process_land_sea: False
+  process_dem: False
+  clip_extent: [-26,-37, 56, 40] # AFRICA
+  nworkers: 16
+  reference_mask_layer_path: 'data/africa_mask_005.tif' 
+
+CLIMATE:
+  input_path: '../nex-gddp-cmip6_AFRICA/'
+  output_path: '../nex-gddp-cmip6_AFRICA_cs_005/'
+  periods: 
+    - [2021,2040]
+    - [2041,2060]
+    - [2061,2080]
+    - [2081, 2100]
+  ssps: ['ssp585']
+
+SOIL:
+  input_path: '../soilgrids/'
+  output_path: '../soilgrids_honduras_005/'
+
+DEM:
+  input_path: 'data/srtm_1km_world_recalculated.tif'
+  output_path: 'data/srtm_005_world_recalculated.tif'
+
+LANDSEA:
+  input_path: 'data/worldclim_land_sea_mask.tif'
+  output_path: 'data/worldclim_land_sea_mask_005.tif'

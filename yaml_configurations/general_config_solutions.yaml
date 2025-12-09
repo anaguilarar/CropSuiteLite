@@ -14,7 +14,6 @@ GENERAL:
   day_interval: 10
   consider_crop_rotation: n
 
-
 SOLUTIONS:
   solutions_path: 'yaml_configurations/response_functions.yaml'
   solution_codes: []

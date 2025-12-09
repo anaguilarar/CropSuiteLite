@@ -474,12 +474,16 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
                 write_file.write(f'{counter+max_ind_val_climate+1} - {parameter}'+'\n')
 
         curr_climsuit = clim_suit[..., plant_idx]
+        ## soil
         soil_suitablility = np.min(suitability_array, axis=2).astype(np.int8)
         suitability_array = np.concatenate((curr_climsuit[..., np.newaxis], suitability_array), axis=2)
         suitability = np.clip(np.min(suitability_array, axis=2), -1, 100) 
         suitability[np.isnan(land_sea_mask)] = -1
         suitability = suitability.astype(np.int8)
-
+        ## suitability multiplication
+        suitability_multi = (curr_climsuit.astype(float) * soil_suitablility.astype(float))
+        suitability_multi = ((suitability_multi)/(100*100)*100).astype(np.int8)
+        
         min_indices = (np.argmin(suitability_array, axis=2) + max_ind_val_climate).astype(np.int8)
         min_indices[min_indices == max_ind_val_climate] = lim_factor[min_indices == max_ind_val_climate, plant_idx]
         min_indices[np.isnan(land_sea_mask)] = -1
@@ -497,6 +501,7 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
             
         if config['options']['output_format'] == 'geotiff' or config['options']['output_format'] == 'cgo':
             write_geotiff(res_path, 'crop_suitability.tif', suitability, extent, nodata_value=-1, cog=config['options']['output_format'].lower() == 'cog')
+            write_geotiff(res_path, 'crop_suitability_multi.tif', suitability_multi, extent, nodata_value=-1, cog=config['options']['output_format'].lower() == 'cog')
             write_geotiff(res_path, 'crop_limiting_factor.tif', min_indices, extent, nodata_value=-1, cog=config['options']['output_format'].lower() == 'cog')
             write_geotiff(res_path, 'soil_suitability.tif', soil_suitablility, extent, dtype='int', nodata_value=-1, cog=config['options']['output_format'].lower() == 'cog')
         elif config['options']['output_format'] == 'netcdf4':
