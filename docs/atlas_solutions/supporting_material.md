@@ -11,7 +11,7 @@ To identify appropriate maximum thresholds for these improved varieties, we perf
 The validated parameters and their corresponding sources are summarized in the table below:
 
 <iframe 
-    src="https://raw.githubusercontent.com/anaguilarar/CropSuiteLite/main/docs/data/evidence_table.html"
+    src="https://cdn.jsdelivr.net/gh/anaguilarar/CropSuiteLite@main/docs/data/evidence_table.html"
     width="100%"
     height="600px"
     style="border: 1px solid #ddd; border-radius: 6px;">
