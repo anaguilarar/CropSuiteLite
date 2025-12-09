@@ -10,4 +10,4 @@ To identify appropriate maximum thresholds for these improved varieties, we perf
 
 The validated parameters and their corresponding sources are summarized in the table below:
 
-{{ read_csv('docs/data/evidence.csv', encoding='utf-8') }}
+{{ read_csv('docs/datatables/evidence.csv', encoding='utf-8') }}
