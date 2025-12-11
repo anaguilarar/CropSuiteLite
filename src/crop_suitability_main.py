@@ -319,14 +319,101 @@ def output_param_data(param_arr, param_list, output_dir, domain):
         with rasterio.open(os.path.join(output_dir, out_f), 'w', **metadata) as dst:
             dst.write(dataset.astype(valid_dtype), 1)
 
-def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params, extent, land_sea_mask, results_path, multiple_cropping_sum=None):
+def stack_parameters_array(config, raster_ref_shape, parameter_list, domain) -> np.ndarray:
+    """
+    read and interpolate parameter data
+    
+    ------
+    raster_ref_shape List: Height width
+        
+    :param parameter_list: dictionary with the paremeters
+    :param domain: Description extent
+    """
+    parameter_array = np.empty((*raster_ref_shape, len(parameter_list)), dtype=np.float16)
+    for counter, parameter in enumerate(parameter_list):
+        print(f' -> Loading {parameter} data')
+        if parameter == 'wealth':
+            
+            print(config['files'].get('wealth_dir'))
+            wealth_array = load_specified_lines(config['files'].get('wealth_dir'), 
+                                                [domain[1], domain[0], domain[3], domain[2]] # -> xyxy -> yxyx
+                                                )
+            
+            print(f'------ domain: {domain}')
+            print(f'-> Shape {wealth_array[0].shape} data')
+            wealth_array, _ = resize_array_interp(wealth_array[0][0], raster_ref_shape)
+            print(f'********* Wealth {wealth_array.shape}')
+            
+            parameter_array[..., counter] = wealth_array
+            
+        elif parameter == 'slope':
+            m = calculate_slope(config['files'].get('fine_dem'), raster_ref_shape, domain)
+            m_shape = m.shape
+            print(f'********* slope {m_shape}')
+            parameter_array[..., counter] = calculate_slope(config['files'].get('fine_dem'), raster_ref_shape, domain)
+        else:
+            msoil = get_soil_data(config, parameter, domain, raster_ref_shape, np.float16)
+            
+            m_shape = msoil.shape
+            print(f'********* {parameter}:  {m_shape}')
+            parameter_array[..., counter] = msoil
+    
+    return parameter_array
+
+def calcification_map(config, parameter_list, parameter_array, extent, results_path):
+
+    calcification_val = int(config['options'].get('simulate_calcification', '0'))
+    ph_index = parameter_list.index('pH')
+    if calcification_val == 1:
+        calcification = 0.5
+    elif calcification_val == 2:
+        calcification = 1.0
+    else:
+        calcification = 1.5
+    
+    ph_data = parameter_array[..., ph_index]
+    ph_gap = 6.5 - ph_data
+    ph_add = np.clip(ph_gap, 0, calcification)
+    parameter_array[..., ph_index] += ph_add
+
+    top, left, bottom, right = extent
+    height, width = ph_add.shape
+    transform = from_bounds(left, bottom, right, top, width, height)
+    with rasterio.open(os.path.join(results_path, 'ph_increase.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.int8,
+                        crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
+        dst.write((ph_add * 10.).astype(np.int8), 1)
+
+    ph_write = parameter_array[..., ph_index].copy()
+    ph_write[ph_write <= 0] = -.1
+    ph_write = (ph_write * 10).astype(np.int8)
+    with rasterio.open(os.path.join(results_path, 'ph_after_liming.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.int8,
+                        crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
+        dst.write(ph_write, 1)
+    del ph_write
+
+    texture_index = parameter_list.index('texture')
+    texture_class = parameter_array[..., texture_index].astype(np.int8)
+
+    # t CaCo3 / ha / 0.1 pH
+    texture_caco3_dict = {1: 2.0, 2: 1.75, 3: 1.85, 4: 1.5, 5: 1.5, 6: 1.2,
+                            7: 1.05, 8: 1.2, 9: 0.9, 10: 0.75, 11: 0.6, 12: 0.45, 13: 0.375}
+    keys = np.array(list(texture_caco3_dict.keys()))
+    lut = np.zeros(keys.max() + 1)
+    lut[keys] = np.array(list(texture_caco3_dict.values()))
+    caco_array = lut[texture_class] * ph_add * 10
+    with rasterio.open(os.path.join(results_path, 'lime_application.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.float32,
+                        crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
+        dst.write(caco_array, 1)
+
+
+
+def cropsuitability(config, clim_suit_shape, plant_formulas, plant_params, extent, land_sea_mask, results_path, multiple_cropping_sum=None):
     """
     Calculate soil suitability for crop plants based on climate suitability and soil parameters.
 
     Parameters:
     - config (dict): Configuration dictionary containing file paths and options.
-    - clim_suit (numpy.ndarray): Array containing climate suitability values for each plant.
-    - lim_factor (numpy.ndarray): Array containing limiting factors for each plant.
+    - clim_suit_shape (list): Array containing climate suitability shape.
     - plant_formulas (dict): Dictionary containing formulas for calculating plant suitability.
     - plant_params (dict): Dictionary containing plant parameters.
     - extent (list): List containing the geographical extent for analysis.
@@ -345,42 +432,14 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
     if extent:
         domain = [extent[1], extent[0], extent[3], extent[2], 0, 0]
 
-    plant_list = [plant for plant in plant_params]
+    plant_list = [plant for plant in plant_params]    
     if os.path.exists(os.path.join(results_path, plant_list[-1], 'crop_suitability.tif')):
         return
 
     parameter_list = [entry.replace('parameters.', '', 1) if entry.startswith('parameters.') else entry for entry in get_id_list_start(config, 'parameters.')] + ['slope']
-    parameter_array = np.empty((clim_suit.shape[0], clim_suit.shape[1], len(parameter_list)), dtype=np.float16)
+    parameter_array = stack_parameters_array(config, clim_suit_shape, parameter_list, domain)
     parameter_dictionary = {parameter_list[parameter_id]: config[f'parameters.{parameter_list[parameter_id]}']['rel_member_func'] for parameter_id in range(len(parameter_list)) if f'parameters.{parameter_list[parameter_id]}' in config}
     parameter_dictionary['slope'] = 'slope'
-    print(parameter_list)
-    for counter, parameter in enumerate(parameter_list):
-        print(f' -> Loading {parameter} data')
-        if parameter == 'wealth':
-            output_shape = (clim_suit.shape[0], clim_suit.shape[1])
-            print(config['files'].get('wealth_dir'))
-            wealth_array = load_specified_lines(config['files'].get('wealth_dir'), 
-                                                [domain[1], domain[0], domain[3], domain[2]] # -> xyxy -> yxyx
-                                                )
-            
-            print(f'------ domain: {domain}')
-            print(f'-> Shape {wealth_array[0].shape} data')
-            wealth_array, _ = resize_array_interp(wealth_array[0][0], output_shape)
-            print(f'********* Wealth {wealth_array.shape}')
-            
-            parameter_array[..., counter] = wealth_array
-            
-        elif parameter == 'slope':
-            m = calculate_slope(config['files'].get('fine_dem'), (clim_suit.shape[0], clim_suit.shape[1]), domain)
-            m_shape = m.shape
-            print(f'********* slope {m_shape}')
-            parameter_array[..., counter] = calculate_slope(config['files'].get('fine_dem'), (clim_suit.shape[0], clim_suit.shape[1]), domain)
-        else:
-            msoil = get_soil_data(config, parameter, domain, (clim_suit.shape[0], clim_suit.shape[1]), np.float16)
-            
-            m_shape = msoil.shape
-            print(f'********* {parameter}:  {m_shape}')
-            parameter_array[..., counter] = msoil
     print(' -> Converting sand and clay content to texture class')
     parameter_array[..., parameter_list.index('sand_content')] = get_texture_class(parameter_array[..., parameter_list.index('sand_content')],\
                                                                                 parameter_array[..., parameter_list.index('clay_content')],\
@@ -395,49 +454,9 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
 
     ##### CALCIFICATION #####
     if int(config['options'].get('simulate_calcification', '0')) > 0:
-        calcification_val = int(config['options'].get('simulate_calcification', '0'))
-        ph_index = parameter_list.index('pH')
-        if calcification_val == 1:
-            calcification = 0.5
-        elif calcification_val == 2:
-            calcification = 1.0
-        else:
-            calcification = 1.5
-        
-        ph_data = parameter_array[..., ph_index]
-        ph_gap = 6.5 - ph_data
-        ph_add = np.clip(ph_gap, 0, calcification)
-        parameter_array[..., ph_index] += ph_add
-
-        top, left, bottom, right = extent
-        height, width = ph_add.shape
-        transform = from_bounds(left, bottom, right, top, width, height)
-        with rasterio.open(os.path.join(results_path, 'ph_increase.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.int8,
-                            crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
-            dst.write((ph_add * 10.).astype(np.int8), 1)
-
-        ph_write = parameter_array[..., ph_index].copy()
-        ph_write[ph_write <= 0] = -.1
-        ph_write = (ph_write * 10).astype(np.int8)
-        with rasterio.open(os.path.join(results_path, 'ph_after_liming.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.int8,
-                            crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
-            dst.write(ph_write, 1)
-        del ph_write
-
-        texture_index = parameter_list.index('texture')
-        texture_class = parameter_array[..., texture_index].astype(np.int8)
-
-        # t CaCo3 / ha / 0.1 pH
-        texture_caco3_dict = {1: 2.0, 2: 1.75, 3: 1.85, 4: 1.5, 5: 1.5, 6: 1.2,
-                              7: 1.05, 8: 1.2, 9: 0.9, 10: 0.75, 11: 0.6, 12: 0.45, 13: 0.375}
-        keys = np.array(list(texture_caco3_dict.keys()))
-        lut = np.zeros(keys.max() + 1)
-        lut[keys] = np.array(list(texture_caco3_dict.values()))
-        caco_array = lut[texture_class] * ph_add * 10
-        with rasterio.open(os.path.join(results_path, 'lime_application.tif'), 'w', driver='GTiff', height=height, width=width, count=1, dtype=rasterio.float32,
-                            crs="EPSG:4326", transform=transform, nodata=-1,compress='LZW') as dst:
-            dst.write(caco_array, 1)
-
+        calcification_map(config, parameter_list, parameter_array, extent, results_path)
+    
+    plant_list = [plant for plant in plant_params]
     formulas = [plant for plant in plant_formulas[plant_list[0]]]
     formulas = dict(zip(formulas, np.arange(0, len(formulas))))
 
@@ -451,7 +470,7 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
         if os.path.exists(os.path.join(res_path, 'crop_suitability.tif')):
             continue
         
-        suitability_array = np.empty((clim_suit.shape[0], clim_suit.shape[1], len(parameter_list)), dtype=np.float16)        
+        suitability_array = np.empty((*clim_suit_shape, len(parameter_list)), dtype=np.float16)        
 
         max_ind_val_climate = 3
 
@@ -473,7 +492,11 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
                     suitability_array[..., counter] = (get_suitability_val_dict(plant_formulas, plant, parameter_dictionary[parameter], parameter_array[..., counter])*100).astype(np.float16)
                 write_file.write(f'{counter+max_ind_val_climate+1} - {parameter}'+'\n')
 
-        curr_climsuit = clim_suit[..., plant_idx]
+        curr_climsuit = np.squeeze(load_specified_lines(
+                        next(f for f in [os.path.join(results_path, plant, f'climate_suitability{ext}') for ext in ['.tif', '.nc', '.nc4']] if os.path.exists(f)),
+                        extent, False
+                    )[0].astype(np.int8))
+        
         ## soil
         soil_suitablility = np.min(suitability_array, axis=2).astype(np.int8)
         suitability_array = np.concatenate((curr_climsuit[..., np.newaxis], suitability_array), axis=2)
@@ -485,7 +508,13 @@ def cropsuitability(config, clim_suit, lim_factor, plant_formulas, plant_params,
         suitability_multi = ((suitability_multi)/(100*100)*100).astype(np.int8)
         
         min_indices = (np.argmin(suitability_array, axis=2) + max_ind_val_climate).astype(np.int8)
-        min_indices[min_indices == max_ind_val_climate] = lim_factor[min_indices == max_ind_val_climate, plant_idx]
+
+        lim_factor = np.squeeze(load_specified_lines(
+                        next(f for f in [os.path.join(results_path, plant, f'limiting_factor{ext}') for ext in ['.tif', '.nc', '.nc4']] if os.path.exists(f)),
+                        extent, False
+                    )[0].astype(np.int8))
+      
+        min_indices[min_indices == max_ind_val_climate] = lim_factor[min_indices == max_ind_val_climate]
         min_indices[np.isnan(land_sea_mask)] = -1
         nan_mask = suitability == -1
         min_indices[nan_mask] = -1

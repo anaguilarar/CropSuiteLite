@@ -6,7 +6,7 @@ import psutil
 import gc
 import re
 import shutil
-
+import rasterio
 from typing import List, Tuple, Union
 
 import numpy as np
@@ -201,30 +201,27 @@ class CropSuiteLite():
         ret_paths = [os.path.join(os.path.split(self._temp_path)[0]+'_var', os.path.split(self._temp_path)[1]), os.path.join(os.path.split(self._temp_path)[0]+'_novar', os.path.split(self._temp_path)[1])]
         for temp in ret_paths:
             if os.path.exists(temp):
-                climsuit = np.dstack([
-                    load_specified_lines(
-                        next(f for f in [os.path.join(temp, c, f'climate_suitability{ext}') for ext in ['.tif', '.nc', '.nc4']] if os.path.exists(f)),
-                        extent, False
-                    )[0].astype(np.int8)
-                    for c in os.listdir(temp)
-                    if c != 'crop_rotation' and os.path.isdir(os.path.join(temp, c))
-                ])
-
-                limiting = np.dstack([
-                    load_specified_lines(
-                        next(f for f in [os.path.join(temp, c, f'limiting_factor{ext}') for ext in ['.tif', '.nc', '.nc4']] if os.path.exists(f)),
-                        extent, False
-                    )[0].astype(np.int8)
-                    for c in os.listdir(temp)
-                    if c != 'crop_rotation' and os.path.isdir(os.path.join(temp, c))
-                ])
-
-                land_sea_mask, _ = load_specified_lines(self.climate_config['files']['land_sea_mask'], extent, False)
-                fine_resolution = (climsuit.shape[0], climsuit.shape[1])
-                if land_sea_mask.shape != fine_resolution:
-                    land_sea_mask = interpolate_nanmask(land_sea_mask, fine_resolution)
+                crops_dir = [croppath for croppath in os.listdir(temp) if (os.path.exists(os.path.join(temp, croppath, 'climate_suitability.tif'))
+                                                or os.path.exists(os.path.join(temp, croppath, 'climate_suitability.nc')))]
                 
-                cropsuitability(self.climate_config, climsuit, limiting, self.plant_params_formulas, self.plant_params, extent, land_sea_mask, temp)
+                crop_clipath = os.path.join(temp, crops_dir[0], 'climate_suitability')
+
+                raster_ext = '.tif' if os.path.exists(crop_clipath + '.tif') else '.nc'
+                filepath =  os.path.join(crop_clipath + raster_ext)
+                if raster_ext == '.tif':
+                    with rasterio.open(filepath, 'r') as src:
+                        raster_shape = [src.height, src.width]
+                else:
+                    import xarray as xr
+                    with xr.open_dataset(filepath) as ds:
+                        raster_shape = [ds.dims['y'], ds.dims['x']]
+                        
+                land_sea_mask, _ = load_specified_lines(self.climate_config['files']['land_sea_mask'], extent, False)
+
+                if land_sea_mask.shape != raster_shape:
+                    land_sea_mask = interpolate_nanmask(land_sea_mask, raster_shape)
+                
+                cropsuitability(self.climate_config, raster_shape, self.plant_params_formulas, self.plant_params, extent, land_sea_mask, temp)
 
     def merge_geodata_outputs(self, extents: List[List[float]]) -> None:
         """
