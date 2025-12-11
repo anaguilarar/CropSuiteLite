@@ -8,11 +8,11 @@ theme:
     - search.suggest
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: green
+      accent: green
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: green
+      accent: green
   highlightjs: false
   logo: imgs/atlas-a.svg
 
