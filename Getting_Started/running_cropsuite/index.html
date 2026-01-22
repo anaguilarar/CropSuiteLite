@@ -1,0 +1,1528 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../from_climatedata_tocrsdatatype/">
+      
+      
+        <link rel="next" href="../../atlas_solutions/atlas_solution_example/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>CropSuiteLite execution - CropSuiteLite Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cropsuitelite-execution" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-header__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CropSuiteLite Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CropSuiteLite execution
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../download_cmp6/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../atlas_solutions/atlas_solution_example/" class="md-tabs__link">
+          
+  
+  
+  Atlas Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/datasets/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CropSuiteLite Documentation" class="md-nav__button md-logo" aria-label="CropSuiteLite Documentation" data-md-component="logo">
+      
+  <img src="../../imgs/atlas-a.svg" alt="logo">
+
+    </a>
+    CropSuiteLite Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../download_cmp6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download daily climate scenarios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../from_climatedata_tocrsdatatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preprocessing Input Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuiteLite execution
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuiteLite execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-configuration-ini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core Configuration (.ini)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Core Configuration (.ini)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-python-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic python execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-automated-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Automated workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Automated workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yaml-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-execution-with-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python execution with YAML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Batch Processing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Batch Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spatial-resolutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Resolutions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-climate-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple climate scenarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command-line execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas Solutions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atlas Solutions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas_solutions/atlas_solution_example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atlas solution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas_solutions/data_visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas_solutions/supporting_material/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CropSuite Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CropSuite Main Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-configuration-ini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core Configuration (.ini)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Core Configuration (.ini)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-python-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic python execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-automated-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Automated workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Automated workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yaml-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-execution-with-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python execution with YAML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Batch Processing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Batch Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spatial-resolutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Resolutions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-climate-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple climate scenarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command-line execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cropsuitelite-execution">CropSuiteLite execution<a class="headerlink" href="#cropsuitelite-execution" title="Permanent link">&para;</a></h1>
+<p>This guide demonstrates how to execute <strong>CropSuiteLite</strong>, a lighter version of the CropSuite framework.
+Key enhancements in this version include:</p>
+<ul>
+<li><strong>No GUI</strong>: Streamlined for server/HPC environments.</li>
+<li><strong>Parallelization</strong>: Multi-core processing for faster results.</li>
+<li><strong>Custom Tiling</strong>: User-defined memory management via tiling options.</li>
+</ul>
+<h2 id="1-core-configuration-ini">1. Core Configuration (.ini)<a class="headerlink" href="#1-core-configuration-ini" title="Permanent link">&para;</a></h2>
+<p>CropSuiteLite maintains the original idea of using a configuration file, which defines all required paths, parameters, and modeling options.
+Below is an example <code>.ini</code> configuration:</p>
+<blockquote>
+<p>example "View Example Configuration (<code>config_win_test.ini</code>)"</p>
+</blockquote>
+<div class="highlight"><span class="filename">INI</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[files]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">output_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">results</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">climate_data_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\climate_data\mpi-esm1_ssp585_2021_2040</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">plant_param_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">plant_params</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">fine_dem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">data\srtm_1km_world_recalculated.tif</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">land_sea_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">data\worldclim_land_sea_mask.tif</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">texture_classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">data\usda_texture_classification.dat</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">[options]</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="na">max_workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">30</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="na">no_tiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">15</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="na">use_scheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="na">irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="na">day_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="na">precipitation_downscaling_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="na">temperature_downscaling_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="na">output_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">geotiff</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="na">output_all_startdates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="na">output_grow_cycle_as_doy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="na">downscaling_window_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="na">downscaling_use_temperature_gradient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="na">downscaling_dryadiabatic_gradient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.00976</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="na">downscaling_saturation_adiabatic_gradient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.007</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="na">downscaling_temperature_bias_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.0005</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="na">downscaling_precipitation_bias_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.0001</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="na">downscaling_precipitation_per_day_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.5</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="na">output_all_limiting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="na">remove_interim_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="na">output_soil_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="na">multiple_cropping_turnaround_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">21</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="na">remove_downscaled_climate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">n</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="na">rrpcf_interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">linear</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="na">consider_crop_rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">y</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="na">simulate_calcification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="na">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="na">xarray_process</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">False</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="na">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="k">[extent]</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="na">upper_left_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-25.0            ! Longitude of upper left corner, Format as decimal degree</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="na">upper_left_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">39.0         ! Latitude of upper left corner</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="na">lower_right_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">55.0            ! Longitude of lower right corner</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="na">lower_right_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-36.0           ! Latitude of lower right corner</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="k">[parameters.base_saturation]</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\bsat</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1.0,0.0,0.0,0.0,0.0,0.0</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1.0</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="na">no_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-128.0</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">base_sat</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="k">[parameters.coarse_fragments]</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\cfvo</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">coarsefragments</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="k">[parameters.clay_content]</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\clay</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">texture</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="k">[parameters.gypsum]</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\gyps</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">gypsum</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a><span class="k">[parameters.pH]</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\ph</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2.0,1.5,1.0,0.75,0.5,0.25</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ph</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a><span class="k">[parameters.salinity]</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\sal</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">elco</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a><span class="k">[parameters.sand_content]</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\sand</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">texture</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a><span class="k">[parameters.soil_organic_carbon]</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\soc</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">100</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">organic_carbon</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a><span class="k">[parameters.sodicity]</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\sod</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">esp</span>
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a><span class="k">[parameters.soildepth]</span>
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a><span class="na">data_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">..\soilgrids\soildepth</span>
+<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a><span class="na">weighting_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a><span class="na">weighting_factors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2,1.5,1,0.75,0.5,0.25</span>
+<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a><span class="na">conversion_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">100</span>
+<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a><span class="na">interpolation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a><span class="na">rel_member_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">soildepth</span>
+</code></pre></div>
+<h3 id="basic-python-execution">Basic python execution<a class="headerlink" href="#basic-python-execution" title="Permanent link">&para;</a></h3>
+<p>Once your <code>.ini</code> file is configured, you can run the model directly via Python:</p>
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">CropSuite</span><span class="w"> </span><span class="kn">import</span> <span class="n">CropSuiteLite</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">config_file_path</span> <span class="o">=</span> <span class="s2">&quot;ini_configurations/config_win_test.ini&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">cs_lite</span> <span class="o">=</span> <span class="n">CropSuiteLite</span><span class="p">(</span><span class="n">config_file</span><span class="o">=</span><span class="n">config_file</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">cs_lite</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="2-automated-workflow">2. Automated workflow<a class="headerlink" href="#2-automated-workflow" title="Permanent link">&para;</a></h2>
+<p>For complex workflows involving multiple scenarios or resolutions, it is recommended to control the model using a YAML configuration file. This file acts as a high-level wrapper that automatically updates the underlying <code>.ini</code> settings.</p>
+<h3 id="yaml-configuration">YAML configuration<a class="headerlink" href="#yaml-configuration" title="Permanent link">&para;</a></h3>
+<p>Modify <code>yaml_configurations/general_config_solutions.yaml</code> to centralize your run parameters.</p>
+<div class="highlight"><span class="filename">YAML</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">GENERAL</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">climate_scenarios</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;..\nex-gddp-cmip6_AFRICA_cs_005\mpi-esm1-2-hr_ssp245_2021_2040&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">soil_grids_data</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;..\soilgrids_005&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">srtm_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;data\srtm_005_world_recalculated.tif&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">landsea_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;data\worldclim_land_sea_mask_005.tif&#39;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results&#39;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">config_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ini_configurations/config_win_test.ini&#39;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">plant_param_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;plant_params/available&#39;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="nt">plant_params_output</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/plant_params&#39;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="nt">extent</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">39.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">55.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-36.0</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1">## xmin, ymax, xmax, ymin</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">final_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="nt">max_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="nt">no_tiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="nt">day_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="nt">consider_crop_rotation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">n</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="nt">xarray_process</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</code></pre></div>
+<h3 id="python-execution-with-yaml">Python execution with YAML<a class="headerlink" href="#python-execution-with-yaml" title="Permanent link">&para;</a></h3>
+<p>The following script reads the YAML, generates a temporary <code>.ini</code> file with the updated paths, and executes the model:</p>
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">CropSuite</span><span class="w"> </span><span class="kn">import</span> <span class="n">CropSuiteLite</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">modify_initial_cropsuite_config</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Load YAML configuration (assumed loaded into config_dict)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">config_file_path</span> <span class="o">=</span> <span class="n">modify_initial_cropsuite_config</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The new file is located at: &#39;</span><span class="p">{</span><span class="n">config_file_path</span><span class="p">})</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Run the model</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">cs_lite</span> <span class="o">=</span> <span class="n">CropSuiteLite</span><span class="p">(</span><span class="n">config_file</span><span class="o">=</span><span class="n">config_file_path</span><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">cs_lite</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="3-batch-processing">3. Batch Processing<a class="headerlink" href="#3-batch-processing" title="Permanent link">&para;</a></h2>
+<p>The automation module supports batch processing for multiple spatial resolutions or climate scenarios.</p>
+<h3 id="spatial-resolutions">Spatial Resolutions<a class="headerlink" href="#spatial-resolutions" title="Permanent link">&para;</a></h3>
+<p>To run the model across different resolutions, provide a list of integers in the YAML file. These integers correspond to WGS84 grid sizes:</p>
+<ul>
+<li>0: 0.5°</li>
+<li>1: 0.25°</li>
+<li>2: 0.1°</li>
+<li>3: 0.083333°</li>
+<li>4: 0.041666°</li>
+<li>5: 0.008333°</li>
+</ul>
+<div class="highlight"><span class="filename">YAML</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">GENERAL</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">final_resolution</span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</code></pre></div>
+<h3 id="multiple-climate-scenarios">Multiple climate scenarios<a class="headerlink" href="#multiple-climate-scenarios" title="Permanent link">&para;</a></h3>
+<p>To process multiple time periods or models sequentially:</p>
+<div class="highlight"><span class="filename">YAML</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">GENERAL</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">climate_scenarios</span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;..\nex-gddp-cmip6_AFRICA_cs_005\mpi-esm1-2-hr_ssp245_2021_2040&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;..\nex-gddp-cmip6_AFRICA_cs_005\mpi-esm1-2-hr_ssp245_2041_2060&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;..\nex-gddp-cmip6_AFRICA_cs_005\mpi-esm1-2-hr_ssp245_2061_2080&#39;</span>
+</code></pre></div>
+<h3 id="command-line-execution">Command-line execution<a class="headerlink" href="#command-line-execution" title="Permanent link">&para;</a></h3>
+<p>Once the YAML is configured, run the full pipeline from the command line:</p>
+<div class="highlight"><span class="filename">Bash</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python<span class="w"> </span>run_cropsuitelite.py<span class="w"> </span>-config<span class="w"> </span>yaml_configurations/general_config_solutions.yaml
+</code></pre></div>
+<h2 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h2>
+<p>The model generates several raster outputs:</p>
+<ul>
+<li><strong><code>crop_suitability.tif</code></strong>: Final suitability index (0–100), using the limiting-factor approach (minimum of climate and soil suitability).</li>
+<li><strong><code>crop_suitability_multi.tif</code></strong>: An alternative suitability index where soil and climate suitability are multiplied rather than minimized.</li>
+<li><strong><code>climate_suitability.tif</code></strong>: The suitability score (0–100) derived solely from climate conditions (temperature, precipitation, solar radiation) during the optimal growing period.</li>
+<li>
+<p><strong><code>soil_suitability.tif</code></strong>: The suitability score (0–100) derived solely from soil and terrain properties (e.g., texture, pH, SOC, slope, elevation).</p>
+</li>
+<li>
+<p><strong><code>optimal_sowing_date.tif</code></strong>: The Day of Year (DOY, 1–365) when the growing cycle starts to achieve the maximum calculated suitability.</p>
+</li>
+<li>
+<p><strong><code>suitable_sowing_days.tif</code></strong>: The total count of days in the year on which a crop cycle could successfully start and achieve a suitability score above the defined threshold.</p>
+</li>
+<li>
+<p><strong><code>limiting_factor.tif</code></strong>: A categorical raster indicating the single most restrictive constraint (the "Liebig minimum") for each pixel. Values correspond to specific variables (e.g., precipitation deficit, temperature stress, or specific soil constraints).</p>
+</li>
+<li><strong><code>all_climlim_factors.tif</code></strong>: A detailed breakdown of specific climate constraints. This file identifies which specific climate variable (e.g., drought, heat stress, vernalization requirements) reduced the suitability score during the growing cycle.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>

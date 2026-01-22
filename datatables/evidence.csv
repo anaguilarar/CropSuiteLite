@@ -1,0 +1,75 @@
+Solution_Type_Code,Solution,Solution_Code,Hazard,Crop_Name,Crop_Code,Yield_Effect_Percentage,Reference,Evidence
+st1,Drought-tolerant varieties,s1,Drought,Maize,c1,15.00,https://doi.org/10.1016/j.landusepol.2019.104091,
+st1,Heat-tolerant varieties,s2,Heat,Maize,c1,9.09,https://www.sciencedirect.com/science/article/pii/S2212096317300645?via%3Dihub,"Accordingly, heat-tolerant varieties had higher (+2?�C) Topt2 and Tmax values than current maize varieties."
+st1,Drought-tolerant varieties,s1,Drought,Millet,c2,30.00,https://www.isaaa.org/kc/cropbiotechupdate/article/default.asp?ID=19408,"Chakti matures 40 days earlier and has a 30% greater yield compared to local varieties, as well as resistance to downy mildew disease"
+st1,Heat-tolerant varieties,s2,Heat,Millet,c2,23.81,https://onlinelibrary.wiley.com/doi/10.1111/pce.12931,"Butt et al. (2005) projected the impact of climate change scenarios (Hadley Centre Coupled Model and Coupled General Circulation Model) in Mali and showed that grain yield of pearl millet will decrease between 6% and 12%, respectively, without adoption of HT tolerant genotypes; however, with adoption of HT tolerant genotypes, the decreases was smaller and ranged between 0.7% and 8%. he temperature ceiling (where seed yield was almost zero) for season long stress for dwarf pearl millet hybrid identified in this study was 42/22�C, which is relatively higher than other crops"
+st1,Drought-tolerant varieties,s1,Drought,Wheat,c3,50.00,https://www.croptrust.org/news-events/news/new-drought-tolerant-durum-wheat-variety-proves-its-worth-in-morocco/,New variety 'Jawahir' yielded ~1.5 t/ha vs 1.0 t/ha for older variety under drought
+st1,Heat-tolerant varieties,s2,Heat,Wheat,c3,11.76,https://e-catalogs.taat-africa.org/com/technologies/heat-and-drought-tolerant-wheat-varieties,They can withstand temperatures that are 4�C higher than normal and show 75% of their yield potential under extreme conditions of less than 200mm of moisture and heat stress.�
+st1,Drought-tolerant varieties,s1,Drought,Rice,c4,24.00,https://www.cgiar.org/annual-report/performance-report-2019/increased-yield-with-drought-tolerant-rice/,"Benin, Madagascar and Nigeria. It was found that the adoption of DTRVs has helped smallholder farmers to increase rice yields by 570 kilograms per hectare, which corresponds to an increase of 24%"
+st1,Heat-tolerant varieties,s2,Heat,Rice,c4,6.98,https://link.springer.com/article/10.1007/s11027-022-10027-4,Varieties with a 3 �C higher temperature tolerance should be bred and introduced until the 2040s under representative concentration pathways (RCPs) 2.6 and 8.5
+st1,Drought-tolerant varieties,s1,Drought,Beans,c5,50.00,https://farmbizafrica.com/high-yielding-drought-resistant-bean-variety-that-matures-in-two-months-is-ready-for-market/,"Bean farmers in Kenya can now harvest up to 600kg per acre in just two months, thanks to a new high yielding variety dubbed Kenya Mali or KAT SW-12 launched in the market two years ago, drought due to its deep roots and can grow well in any ecological region in the country"
+st1,Heat-tolerant varieties,s2,Heat,Beans,c5,11.76,https://allianceforscience.org/blog/2015/04/ciat-scientists-develop-heat-beater-beans-that-could-enhance-food-security/,
+st1,Drought-tolerant varieties,s1,Drought,Cassava,c6,600.00,https://www.iita.org/news-item/farmers-get-better-yields-new-drought-tolerant-cassava/,Cassava farmers in the semi-arid zones of sub-Saharan Africa are now enjoying 6-10 times better yields thanks to a new variety developed by IITA that is well-adapted to the dry or drought-prone conditions of the regio
+st1,Heat-tolerant varieties,s2,Heat,Cassava,c6,12.50,"https://cropscipublisher.com/index.php/fc/article/html/3872/#:~:text=Cassava%20(Manihot%20esculenta%20Crantz)%20is,duration%20without%20significant%20yield%20compromise.","It can tolerate a temperature level of up to 40 �C, beyond which the rate of photosynthesis may decrease (Pushpalatha and Gangadharan, 2020). "
+st1,Drought-tolerant varieties,s1,Drought,Coffe Arabica,c7,33.33,https://doi.org/10.1002/agg2.20488,
+st1,Heat-tolerant varieties,s2,Heat,Coffe Arabica,c7,15.00,,"Indigenous to Guinea, Sierra Leone and Ivory Coast, stenophylla grows in hot-tropical locations at low elevations. After collecting data for the main coffee crop species (Arabica, robusta, and Liberica), we were able to better understand their key climate requirements and compare them to stenophylla. Our results showed that stenophylla has mean annual temperature requirement of 24.9?C, which is 1.9?C higher than robusta, and a staggering 6.2�6.8 ?C higher than Arabica."
+st1,Drought-tolerant varieties,s1,Drought,Tea,c8,50.00,https://www.reuters.com/article/business/finance/kenyas-new-purple-tea-will-be-good-for-you-idUSJOE72609M,"Kenya launched two new tea clones last year that are tougher in drought. The research foundation said the two, TRFK 371/3 and TRFK 430/90, yield about 50 percent more"
+st1,Heat-tolerant varieties,s2,Heat,Tea,c8,,,
+st1,Drought-tolerant varieties,s1,Drought,Cocoa,c9,20.00,https://farmonaut.com/africa/sustainable-cocoa-production-7-powerful-solutions-in-ghana,"Disease-tolerant, drought-resistant hybrids"
+st1,Heat-tolerant varieties,s2,Heat,Cocoa,c9,,,
+st1,Drought-tolerant varieties,s1,Drought,Sugarcane,c10,41.00,https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2022.963377/full,"These transgenic plants exhibit obvious improvements in yield performance and various physiological traits under the limited-irrigation condition in the field, such as increasing 41.9% yield and 44.4% the number of ratooning sugarcane seedlings."
+st1,Heat-tolerant varieties,s2,Heat,Sugarcane,c10,,,
+st1,Drought-tolerant varieties,s1,Drought,Cotton,c11,30.00,https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4944377,Breeding trials identified genotypes combining high yield with drought resistance (improved yields in drought by ~30%)papers.ssrn.com
+st1,Heat-tolerant varieties,s2,Heat,Cotton,c11,17.90,https://www.researchgate.net/profile/Abdul-Wahab-Soomro/publication/358477621_CHARACTERIZATION_AND_PERFORMANCE_OF_CRIS-543_HIGH_YIELDING_AND_HEAT_TOLERANT_COTTON_VARIETY/links/6204058a4d47431e1f513126/CHARACTERIZATION-AND-PERFORMANCE-OF-CRIS-543-HIGH-YIELDING-AND-HEAT-TOLERANT-COTTON-VARIETY.pdf,"In Sindh (Pakistan), the heat-tolerant cotton CV�CRIS-543 yielded ~4.0�t/ha seed cotton, about 20% higher than the local check (3.3�3.4�t/ha) in multi-year trialsresearchgate.net. It performs well in hot, arid zones where traditional varieties suffer heat-induced fruit shedding"
+st1,Drought-tolerant varieties,s1,Drought,Soybean,c12,14.28,https://agresearchmag.ars.usda.gov/2008/nov/soybean,"The slow-wilting lines yield 4 to 8 bushels more than conventional varieties under drought conditions�depending on the region and environment, says Carter. For example, under drought conditions, normal soybeans yield 30 bushels per acre, but slow-wilting types yield about 35 bushels per acre."
+st1,Heat-tolerant varieties,s2,Heat,Soybean,c12,20.00,https://www.nature.com/articles/s41598-023-28354-0,"When averaged across cultivars, drought stress significantly decreased seed number (46%) and weight (35%) compared to the control. "
+st1,Drought-tolerant varieties,s1,Drought,Banana,c13,400.00,https://allianceforscience.org/blog/2021/06/east-africas-banana-farmers-welcome-new-varieties-that-resist-disease-and-drought/,"In addition to disease-resistance, the new hybrids are better adapted to drought and have more leaf cover. They also increase yields four-fold and taste much like popular local varieties, making them well-suited to long-lasting plantations and improving food security, researchers said."
+st1,Heat-tolerant varieties,s2,Heat,Banana,c13,,,
+st1,Drought-tolerant varieties,s1,Drought,Sunflower,c14,54.00,Option 1: https://www.researchgate.net/publication/287107572_DROUGHT_EFFECTS_ON_YIELD_TRAITS_OF_SOME_SUNFLOWER_INBRED_LINES ;,Option 1: Drought tolerance of maleinbred lines against stress conditions changed between 50-100% in 1000 seedweight and 70-100% in oil yield. ;
+,,,,,,,Option 2: https://farmbizafrica.com/hybrid-sunflowers-increase-farmer-output-while-improving-drought-resistance/,"Option 2: Compared to the more common Kenya Fedha sunflower which gives just 800 kilograms of seeds an acre, these three varieties have a yield potential of 800-1200Kg per acre depending on the crop management and weather."
+st1,Heat-tolerant varieties,s2,Heat,Sunflower,c14,28.57,https://www.nature.com/articles/s41598-021-81072-3,Heat stress treatment was applied by growing sunflower germplasm at 42 �C and osmotic stress by adding polyethylene glycol 8000 which decreased the osmotic potential to ? 0.6 MPa
+st1,Drought-tolerant varieties,s1,Drought,Sesame,c15,50.00,https://www.nab.com.na/wp-content/uploads/2023/08/EVALUATION-OF-SESAME-VARIETIES-IN-NAMIBIA-Report-of-2022-NAB-2023.pdf,It is not directly linked
+st1,Heat-tolerant varieties,s2,Heat,Sesame,c15,,,
+st1,Drought-tolerant varieties,s1,Drought,Oilpalm,c16,,,
+st1,Heat-tolerant varieties,s2,Heat,Oilpalm,c16,,,
+st1,Drought-tolerant varieties,s1,Drought,Rapeseed,c17,,,
+st1,Heat-tolerant varieties,s2,Heat,Rapeseed,c17,,,
+st1,Drought-tolerant varieties,s1,Drought,Barley,c21,375.00,https://qcat.wocat.net/en/wocat/technologies/view/technologies_6739/,
+st1,Heat-tolerant varieties,s2,Heat,Barley,c21,20.00,https://www.sciencedaily.com/releases/2019/07/190710121545.htm,"And this is all well worth the effort: even under adverse conditions, Halle's best barley produced up to 20 percent higher yields than native plants"
+st1,Drought-tolerant varieties,s1,Drought,Chickpea,c22,15.00,https://www.cgiar.org/news-events/news/first-ever-high-yielding-chickpea-variety-developed-using-marker-assisted-backcrossing-mabc-released-in-ethiopia/,"The variety delivered the highest grain yield of 3822 kg/ha at Arsi Robe, Ethiopia, which translates into an yield advantage of 15% over the check variety �Teketay� and 78% more than the local check."
+st1,Heat-tolerant varieties,s2,Heat,Chickpea,c22,26.32,https://phys.org/news/2019-04-breakthrough-high-yield-drought-resilient-chickpeas.html,tolerate temperatures up to 38 degrees Celsius and provide higher yields.
+st1,Drought-tolerant varieties,s1,Drought,Coconut,c23,10.89,https://www.sciencedirect.com/science/article/abs/pii/S0304423821003277?via%3Dihub,AS showed a significantly (P < 0.05) higher yield (101 nuts/palm/year) compared to CRIC60 (90 nuts/palm/year)
+st1,Heat-tolerant varieties,s2,Heat,Coconut,c23,,https://cocos.sljol.info/articles/10.4038/cocos.v19i1.4748,Pollen germination Tmax
+st1,Drought-tolerant varieties,s1,Drought,Pigeonpea,c25,30.00,https://oar.icrisat.org/10587/1/icrisat-is-pigeonpea-hybrid.pdf,"ICPH 8, the world�s first pigeonpea hybrid,"
+,,,,,,,,was released jointly by ICRISAT and ICAR in
+,,,,,,,,1991. The hybrid yields 25-30% more than pure
+,,,,,,,,"line cultivars in farmers� fields. Moreover, it is"
+,,,,,,,,drought-tolerant.
+st1,Heat-tolerant varieties,s2,Heat,Pigeonpea,c25,45.00,,
+st1,Drought-tolerant varieties,s1,Drought,Tobacco,c26,30.00,https://www.coresta.org/sites/default/files/abstracts/2016_AP39_Magama.pdf,"In D, T75 yielded ~ 30% & 20% higher than"
+,,,,,,,,K RK26 & K RK66 resp. in SMF
+st1,Heat-tolerant varieties,s2,Heat,Tobacco,c26,,,
+st1,Drought-tolerant varieties,s1,Drought,Onion,c27,20.00,https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2021.600371/full,"Tolerant genotypes, viz. Acc. 1656, Acc. 1658, W-009, and W-085, had higher DTE (>90%), fewer yield losses (<20%), and performed superiorly for different traits under drought stress."
+st1,Heat-tolerant varieties,s2,Heat,Onion,c27,,,
+st1,Drought-tolerant varieties,s1,Drought,Tomato,c28,50.00,https://www.afhu.org/2023/04/19/researchers-develop-new-drought-tolerant-variety-of-tomatoes/,The researchers identified interactions between two regions of the tomato genome that resulted in a 20-50% increase in the overall tomato yield under irrigated conditions as well as in droughts
+st1,Heat-tolerant varieties,s2,Heat,Tomato,c28,7.89,"https://www.sciencedirect.com/science/article/abs/pii/S0304423823006040#:~:text=HS%20causes%20wilting%2C%20leaf%20senescence,possible%20solutions%20to%20overcome%20them.",
+st1,Drought-tolerant varieties,s1,Drought,Rubber,c29,27.00,https://pdfs.semanticscholar.org/6f43/9828f2b68c8fd2e4c5b55a22bdd9201556e1.pdf,IAC 500 series clones yielded 66.8 g/tapping vs 48.7 g for drought-tolerant check RRIM 600pdfs.semanticscholar.org; RRIM 600 is widely used in drought-prone areaspmc.ncbi.nlm.nih.gov.
+st1,Heat-tolerant varieties,s2,Heat,Rubber,c29,13.42,https://academic.oup.com/treephys/article-abstract/44/3/tpae022/7607187?redirectedFrom=fulltext,"The range of T50 observed (42.9�46.2 �C) is well above the current maximum air temperatures Tmax,obs (T50 ? Tmax,obs >5.8 �C), suggesting that H. brasiliensis is likely thermally safe in this south-east Asian region of Malaysia."
+st1,Drought-tolerant varieties,s1,Drought,Cofferobusta,c30,50.00,https://coffeefactz.com/robusta-coffee-breeding-breakthrough/,"Nestl� has also reported progress, creating two�non-GMO robusta varieties�that yield up to 50% more beans per tree"
+st1,Heat-tolerant varieties,s2,Heat,Cofferobusta,c30,,,
+st1,Drought-tolerant varieties,s1,Drought,Groundnut,c31,23.00,https://www.slideshare.net/slideshow/poster-drought-tolerant-groundnut/48138225,ICGV 91114 groundnut yields ~23% more than the old variety (TMV 2) in drought-prone areas:contentReference[oaicite:30]{index=30} (robust field impact)
+st1,Heat-tolerant varieties,s2,Heat,Groundnut,c31,,,
+st1,Drought-tolerant varieties,s1,Drought,Yam,c32,22.33,,Tubers same as potato values
+st1,Heat-tolerant varieties,s2,Heat,Yam,c32,14.29,,
+st1,Drought-tolerant varieties,s1,Drought,Potato,c33,22.33,https://cipotato.org/agile-potato-for-asia/drought-resistant-potato-research-across-cip-aligns-un-observance-desertification/,"�Some farmers obtained tuber yield over 30 ton/ha,� compared to 23 ton/ha of national average production"
+st1,Heat-tolerant varieties,s2,Heat,Potato,c33,14.29,https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2024.1364244/full,
+st1,Drought-tolerant varieties,s1,Drought,Sorghum,c34,29.41,https://www.mdpi.com/2073-4395/13/2/557,The highest grain yield recorded was at 3.91 t/ha for G144 (Kaura Short Panicle-1) and 3.86 t/ha for G56 (CSRO1) which were above the mean grain yield (2.68 t/ha).
+st1,Heat-tolerant varieties,s2,Heat,Sorghum,c34,6.25,https://www.gjournals.org/2024/09/17/091424113-belay/,"Genotypic mean grain yield ranged from 1730 to 3650 kg ha-1 with average mean grain yield of 2421 kg ha-1, while environment ranged from 1670 to 3422 kg ha-1."
+st1,Drought-tolerant varieties,s1,Drought,Cowpea,c35,106.89,https://tropicallegumeshub.com/wp-content/uploads/2020/06/Seven_Seasons_Of_Learnings-05_Boukar_et_al.pdf,Table 24. Cowpea varieties released in different countries
+st1,Heat-tolerant varieties,s2,Heat,Cowpea,c35,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
